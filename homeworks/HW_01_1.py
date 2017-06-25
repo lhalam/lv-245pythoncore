@@ -4,7 +4,6 @@
 # Вивести k та h.
 #k = 130985
 k = input('Please enter number and press "Enter": ')
-
 if len(k) > 2:
     pass
 else:
