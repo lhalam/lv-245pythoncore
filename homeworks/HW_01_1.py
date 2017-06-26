@@ -8,7 +8,6 @@ if len(k) > 2:
     pass
 else:
     k = input(('Please enter bigger number and press "Enter": '))
-
 h = int(k[-3])
 print('Exercise 1:')
 print('The third digit at the end of the number {} is {}'\
