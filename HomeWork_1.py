@@ -21,8 +21,8 @@
 # import math
 # x = float(input("Присвойте значення змінній - x: "))
 # x = 3.14
-# d = x - int(x) # 3.14 - 3 = 0.14
-# d = int(str(d)[2]) # str(d)=>"0.14" str(d)[2]=>"1" =>1
+# d = x - int(x)
+
 # print(math.modf(x))
 # print("Число 'd' = " + str(d))
 
@@ -104,19 +104,78 @@
 #         print("Число має більше або менше 4 символів")
 
 # EX_11
-
-# k = input("Введіть число k, довжиною 3 символи - ")
 #
-# k = str(k[-1])
-# k= int(k)
+# k = input("Введіть число k, довжиною 3 символи - ")
+# k = str(k[::-1])
+# k = int(k)
 # print(k)
 
 
-import math
-x = 3.14
+# # EX_12
+#
+# a = float(input("a: "))
+# b = float(input("b: "))
+# c = float(input("c: "))
+#
+# D = b**2 - 4*a*c
+#
+# if D > 0:
+#     x1 = (-b+D**0.5)/2*a
+#     x2 = (-b-D**0.5)/2*a
+#     print(x1)
+#     print(x2)
+# elif D < 0:
+#     print("Коренів не має")
+# elif D == 0:
+#     x1 = -b/2*a
+#     print(x1)
+#
+# print(D)
+#
+# # EX_13
+#
+# k = input("Введіть число k, довжиною 4 символи - ")
+# k = str(k)
+#
+# if k.find("."):
+#     k = k.replace(".","")
+#
+#     if 3 < len(str(k)) < 5:
+#         k = str(k)
+#         k1 = k[0]
+#         k2 = k[1]
+#         k3 = k[2]
+#         k4 = k[3]
+#
+#         s1 = int(k1) + int(k2)
+#         s2 = int(k3) + int(k4)
+#
+#         if s1 == s2:
+#             print("Сума перших та останніх чисел є рівною 's' = " + str(s1))
+#         else:
+#             print(s1,s2)
+#     else:
+#         print("Число має більше або менше 4 символів")
 
-print(math.modf(x)[0])
-
+# # EX_14
+#
+# k = input("Введіть ціле число, довжиною 3 символи - ")
+#
+# if 2 < len(str(k)) < 4:
+#     k = str(k)
+#     k1 = k[0]
+#     k2 = k[1]
+#     k3 = k[2]
+#
+#     s1 = (int(k1) + int(k2) + int(k3))**3
+#     s2 = int(k)**2
+#
+#     if s1 == s2:
+#         print("Сума та квадрат 's1 = s2' = " + str(s1))
+#     else:
+#         print(s1,s2)
+# else:
+#     print("Число має більше або менше 3 символів")
 
 
 
