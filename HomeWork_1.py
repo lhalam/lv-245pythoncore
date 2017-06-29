@@ -54,6 +54,50 @@
 # else:
 #     print("Кількість секунд не може бути відємною")
 
+# # EX_5
+#
+# h = int(input('години = '))
+# m = int(input('хвилини = '))
+# s = int(input('секунди = '))
+#
+# if (0 <= h <= 11) and (0 <= m <= 59) and (0 <= s <= 59 ):
+#     h1 = h * (360/12)
+#     m1 = m * (360/12/60)
+#     s1 = s * (360/12/60/60)
+#
+#     time_gradus = h1 + m1 + s1
+#     print('%.2f' % time_gradus)
+
+# # EX_6
+#
+# gradus = float(input('Градуси = '))
+#
+# if (0 <= gradus <= 360):
+#     h = gradus // (360/12)
+#     m = (gradus % (360/12)) * 2
+#
+# print(h,':',m)
+
+# EX_7
+#
+# days = []
+# for k in range(365):
+#     if k != 0:
+#         if   (k % 7) == 1: day = "пн_"  + str(k)
+#         elif (k % 7) == 2: day = "вт_"  + str(k)
+#         elif (k % 7) == 3: day = "сер_" + str(k)
+#         elif (k % 7) == 4: day = "чт_"  + str(k)
+#         elif (k % 7) == 5: day = "пт_"  + str(k)
+#         elif (k % 7) == 6: day = "сб_"  + str(k)
+#         elif (k % 7) == 0: day = "нд_"  + str(k)
+#         days.append(day)
+#
+# print(days)
+#
+# n = int(input('день року = '))
+# n -= 1
+# print(days[n])
+
 
 # EX_8
 #
