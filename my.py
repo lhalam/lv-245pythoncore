@@ -1,8 +1,4 @@
-# # # Home work
-# # # -----------------------------------------------------------
-# # # -----------------------------------------------------------
-# # # EX_1
-# #
+# python
 # # # n = int(input("n = "))
 # # #
 # # # suma = 0
@@ -67,14 +63,13 @@
 import math
 def fib(n):
     List_Fibanachi = []
-    i = 0
+    i = 1
     while True:
-        if i != 0 :
-            SQRT5 = math.sqrt(5)
-            PHI = (SQRT5 + 1) / 2
-            k = int(PHI ** i / SQRT5 + 0.5)
-            if k%2 == 0:
-                List_Fibanachi.append(k)
+        SQRT5 = math.sqrt(5)
+        PHI = (SQRT5 + 1) / 2
+        k = int(PHI ** i / SQRT5 + 0.5)
+        if str(k).find("0") != -1:
+            List_Fibanachi.append(k)
         if len(List_Fibanachi) == n:
             break
         i += 1
