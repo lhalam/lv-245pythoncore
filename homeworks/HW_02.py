@@ -15,7 +15,6 @@ def create_variables(var_name, max_key_index=30, var_values=None):
         var.update(part_of_var)
     return var
 
-
 def numerators_calculation(variable, multiplier, max_power_index=30):
     result_variable = 0
     for (key, val), power in zip(variable.items(),
