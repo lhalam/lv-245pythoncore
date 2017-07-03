@@ -1,6 +1,7 @@
-# 1
+# exercise 1
+
 # create variables with them values like dictionary
-# key_index starts from zero position to max_key_index
+# key_index starts from zero position to max_key_index include
 def create_variables(var_name, max_key_index=30, var_values=None):
     var = {}
     var_keys = []
@@ -40,8 +41,44 @@ def fraction_calculation(a, b, c, x, y, z):
     return round(result, 3)
 
 
+# show result
 a = create_variables('a')
 b = create_variables('b')
 c = create_variables('c')
 x, y, z = 2, 2, 2
-print(fraction_calculation(a, b, c, x, y, z))
+print('result of exercise 1 is:',
+      fraction_calculation(a, b, c, x, y, z))
+
+
+# exercise 2
+def calculate_factorial(number):
+    result = 1
+    if number == 0:
+        result = 1
+    else:
+        for i in range(1, number + 1):
+            result *= i
+    return result
+
+
+# to calculate factorial - opinion 2
+# def calculate_factorial(numbers):
+#     from functools import reduce
+#     if numbers == 0:
+#         return 1
+#     else:
+#         return (reduce(lambda number, result=1: number * result,
+#                    [i for i in range(1, numbers + 1)]))
+
+
+def calculate_expression(m, n):
+    result = ((calculate_factorial(n) * calculate_factorial(m)) /
+              calculate_factorial(n + m))
+    return result
+
+
+# show result
+print('result of exercise 2 is:',
+      round(calculate_expression(2, 2), 3))
+
+# exercise 3
