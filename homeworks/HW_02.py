@@ -76,3 +76,32 @@ print('result of exercise 2 is:',
       round(calculate_expression(2, 2), 3))
 
 # exercise 3
+
+def review_word(x, y):
+    for i in x:
+        if not i in y or len(x) != len(y):
+            break
+        else:
+            for j in y:
+                if i == j:
+                    if x.count(i) != y.count(j):
+                        break
+    else:
+        return y
+
+
+def perestanovka(words):
+    result = []
+    for i in words[1:]:
+        if review_word(words[0], i):
+            result.append(i)
+    return ', '.join(result)
+
+
+# show result
+input_words = ['cat', 'alex', 'tac', 'atc', 'tca']
+print('result of exercise 3 is:')
+print('From word "{}" we can create words: {}'. \
+      format(input_words[0], perestanovka(input_words)))
+
+# 4
