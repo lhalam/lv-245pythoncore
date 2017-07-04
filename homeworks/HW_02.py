@@ -101,8 +101,6 @@ print('from word "{}" we can create words: {}'. \
 
 # exercise 4
 print('\nexercise 4:')
-
-
 # create matrix with random numbers
 def create_matrix(max_number, row=5, col=5):
     import random
@@ -113,7 +111,6 @@ def create_matrix(max_number, row=5, col=5):
             matrix[i].append(random.randint(0, max_number))
     return matrix
 
-
 def find_max_number_index(matrix):
     dict_max_numbers = {}
     for i in range(len(matrix)):
@@ -122,7 +119,6 @@ def find_max_number_index(matrix):
         dict_max_numbers[(row, col)] = max(matrix[row])
     for j in dict_max_numbers:
         return max((dict_max_numbers[i], i) for i in dict_max_numbers)
-
 
 def change_max_elements(matrix_1, matrix_2):
     max_number_matrix_1 = find_max_number_index(matrix_1)[0]
@@ -133,7 +129,6 @@ def change_max_elements(matrix_1, matrix_2):
         = max_number_matrix_1
     return 'matrix_1:\n{},\n matrix_2:\n{}'.format(matrix_1, matrix_2)
 
-
 matrix_a = create_matrix(100)
 matrix_b = create_matrix(100)
 print('matrix a:\n{}'.format(matrix_a))
@@ -143,3 +138,31 @@ print('The max number in matrix_b and his index is {}'.format(find_max_number_in
 print('change max elements between matrix_a and matrix_b\n', change_max_elements(matrix_a, matrix_b))
 
 # exercise 5
+print('\nexercise 5:')
+
+
+# create matrix with random numbers
+def create_matrix(max_number, min_number=0, numbers=5):
+    import random
+    matrix = []
+    for j in range(numbers):
+        matrix.append(random.randint(min_number, max_number))
+    return matrix
+
+
+def mysort(matrix):
+    for j in range(len(matrix)):
+        for i in range(len(matrix) - 1):
+            if matrix[i] < matrix[i + 1]:
+                matrix[i], matrix[i + 1] = matrix[i + 1], matrix[i]
+    return matrix
+
+
+first_matrix = create_matrix(20)
+print('The first input matrix is:\n{}'.format(first_matrix))
+print('The sorted first matrix is:\n{}'. \
+      format(mysort(first_matrix)))
+second_matrix = create_matrix(50)
+print('The second input matrix is:\n{}'.format(second_matrix))
+print('The sorted second matrix is:\n{}'. \
+      format(mysort(second_matrix)))
