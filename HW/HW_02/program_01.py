@@ -1,6 +1,6 @@
-a = 1
-b = 1
-c = 1
+a = 0
+b = 0
+c = 0
 x = int(input('x = '))
 y = int(input('y = '))
 z = int(input('z = '))
