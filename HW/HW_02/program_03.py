@@ -1,14 +1,18 @@
-x = "abcd"
-y = "bcad"
-
+x = 'abcd'
+y = 'abcd'
 
 def fun(x,y):
-    a = 0
-    for i in range(len(x)):
-        for j in range(len(x)):
-            if x[j] is y[i]:
-                a += 1
-                if a == len(x):
-                    return x
+    a = False
+    if len(x) == len(y):
+        for i in range(len(x)):
+            if x[i] in y:
+                a = True
+            else:
+                a = False
+                break
+    if a:
+        return x
+    else:
+        return 'False'
 
 print fun(x,y)

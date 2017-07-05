@@ -1,6 +1,6 @@
-a = int(input('a = '))
-b = int(input('b = '))
-c = int(input('c = '))
+a = 1
+b = 1
+c = 1
 x = int(input('x = '))
 y = int(input('y = '))
 z = int(input('z = '))
@@ -9,6 +9,7 @@ def fun(a,x):
     n = 0
     while n < 31:
         n += 1
+        a += 1
         c = a*(x**n)
     return c
 
