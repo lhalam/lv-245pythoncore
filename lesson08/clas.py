@@ -47,9 +47,9 @@ class Exp(object):
         self.s_x = 99
         self.s_y = [2,2]
         # print dir()
-    # def __str__(self):
-    #     return "x:{} y:{} s_x:{} s_y{}".format(
-    #         self.x, self.y, self.s_x, self.s_y)
+    def __str__(self):
+        return "x:{} y:{} s_x:{} s_y{}".format(
+            self.x, self.y, self.s_x, self.s_y)
     def __repr__(self):
         return "({} {} {} {})".format(
             self.x, self.y, self.s_x, self.s_y)
@@ -60,7 +60,6 @@ class Exp(object):
         else:
             return False
     def sum(self):
-
         return self.x + self.s_x
 
 
@@ -114,3 +113,5 @@ es = [Exp(), Exp()]
 print es
 
 print e1 == e2
+
+print "clas name: ", __name__
