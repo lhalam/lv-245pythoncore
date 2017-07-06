@@ -81,3 +81,4 @@ def f(a):
 c = 10
 b = f(c)
 print c, b
+print help(list)
