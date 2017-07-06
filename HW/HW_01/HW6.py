@@ -1,9 +1,9 @@
-n = float(input("Vvedit chuslo:   "))
+n = float(input("Vvedit chuslo float:   "))
 
 if 0 <= n <= 360:
-    h = 30
-    m = 6
-    h1 = n // h
-    h2 = h % 30
-    m1 = h2 // m
-    print (n , h1, m1,)
+
+    m1 = n * 2
+    h = m1 // 60
+    m2 = m1 - (60 * h)
+
+    print ("h-",int(h), "   m-",int(m2))

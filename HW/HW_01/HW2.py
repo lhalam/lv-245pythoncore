@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-x = input('Vvedit chuslo:   ')
+x = float(input('Vvedit chuslo float:   '))
 y = x - int(x)
-i = y * 10 
-print int(i), int(x), y, i, x
+i = y * 10
+print (int(i))
 
 
 
