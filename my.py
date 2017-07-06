@@ -77,25 +77,27 @@
 #
 # t = fib(10)
 
-import math
-class Point():
-    def __init__(self, X=0,Y=0):
-        self.x = X
-        self.y = Y
-    def __repr__(self):
-        return "({}, {})".format(self.x, self.y)
-    def distanse(self):
-        d = math.sqrt(self.x**2 + self.y**2)
-        return d
-    def __eq__(self, other):
-        # return   self.x == other.x and self.y == other.y
-        return self.x == other.y and self.y == other.x
+# import math
+# class Point():
+#     def __init__(self, X=0,Y=0):
+#         self.x = X
+#         self.y = Y
+#     def __repr__(self):
+#         return "({}, {})".format(self.x, self.y)
+#     def distanse(self):
+#         d = math.sqrt(self.x**2 + self.y**2)
+#         return d
+#     def __eq__(self, other):
+#         # return   self.x == other.x and self.y == other.y
+#         return self.x == other.y and self.y == other.x
+#
+# p1 = Point()
+# p2 = Point(12,10)
+# p3 = Point(10,12)
+# print (p1, p2, p3)
+# print (p2.distanse())
+# print (p3 == p2)
 
-p1 = Point()
-p2 = Point(12,10)
-p3 = Point(10,12)
-print (p1, p2, p3)
-print (p2.distanse())
-print (p3 == p2)
-
+import sys
+print(sys.path)
 
