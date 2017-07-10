@@ -1,10 +1,16 @@
+from validate_email import validate_email
+from hashlib import md5
+
+
 class User(object):
-    def __init__(self, usernames, first_name=None, last_name=None,):
+
+    def __init__(self, usernames, first_name=None, last_name=None, email=None, password=None):
         self.usernames = usernames
         self.first_name = first_name
         self.last_name = last_name
+        self.email=email
+        self.password=password
 
-    def __set__(self, instance, value):
 
     def get_username(self):
         return self.usernames
@@ -14,6 +20,8 @@ class User(object):
 
     def get_short_name(self):
         return self.first_name
+
+
 
     def _is_valid_username(self):
         if len(self.usernames) < 50:
@@ -39,13 +47,20 @@ class User(object):
             else:
                 return False
 
-    def _is_valid_email(self)
+    def _is_valid_email(self):
+        for i in self.email:
+            if validate_email(self.email):
+                return True
+            else:
+                return False
 
-
-
-
-    #_is_valid_password()
-
+    def set_password(self):
+        hesh = md5(self.password)
+        return hesh
+    
+    def _is_valid_password(hesh):
+        return False
+        
 
     def is_valid(self):
         errors = []
@@ -55,18 +70,32 @@ class User(object):
             errors.append("lirst_name")
         if not self._is_valid_first_name():
             errors.append("last_name")
+        if not self._is_valid_email():
+            errors.append("email")
+        if not self._is_valid_password():
+            errors.append("password")
+        
         return errors
 
 
 
 if  __name__ =='__main__':
-    users = [User(usernames="767g95//==  ", first_name="eredfbgbdsbdbdfbdrerwerewrwerweewrwerew"),
-             User(usernames="Tannya", first_name="gfefe"),
-             User(usernames="IHOR", first_name="ffefe"),
-             User(usernames="KATYA", first_name="ssssss"), ]
+
+    users = [User(usernames="user.YURIY", first_name="YURIY", last_name="last.YURIY",
+                  email="yuriy.semesyuk@yahoo.com"),
+             User(usernames="user.TANYA", first_name="TANYA", last_name="last.TANYA",
+                  email="yuriy.semesyuk@yahoo.com"),
+             User(usernames="user.IHOR", first_name="IHOR", last_name="last.IHOR",
+                  email="IHOR@yahoo.com"),
+             User(usernames="user.KATYA", first_name="KATYA", last_name="last.KATYA",
+                  email="KATYA@yahoo.com")]
 
     for user in users:
-        print(user._is_valid_username())
-
-        print(user._is_valid_first_name())
+        print(user.get_username())
         print(user.is_valid())
+        # print(user._is_valid_email())
+        # print(user._is_valid_username())
+        # print(user._is_valid_first_name())
+        # print(user._is_valid_last_name())
+        # print(user.get_full_name())
+        # print(user.get_short_name())
