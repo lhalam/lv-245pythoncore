@@ -1,5 +1,5 @@
 class User(object):
-    def __init__(self, username='fdsfsdf', first_name=None, last_name=None, email=None, password='dfsfs'):
+    def __init__(self, username=None, first_name=None, last_name=None, email=None, password=None):
         self.username = username
         self.first_name = first_name
         self.last_name = last_name
@@ -79,6 +79,7 @@ class User(object):
             errors.append("password")
 
         return errors
+
 
 
 
