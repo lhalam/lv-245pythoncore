@@ -5,17 +5,14 @@ b = [ [1,2,3,-3,5], [9,-30,7,6,5], [1,5,6,44,3], [4,7,5,33,20000], [3,4,10,4,8] 
 
 def fun(x):
     n = 0
+    ii = 0
+    jj = 0
     for i in range(len(x)):
         for j in range(len(x[i])):
-            if x[i][j] > n:
-                n = x[i][j]
-    for i in range(len(x)):
-        for j in range(len(x[i])):
-            if x[i][j] == n:
-                return i,j
-            else:
-                continue
-
+            if x[i][j] > x[ii][jj]:
+                ii = i
+                jj = j
+    return ii, jj
 
 num1 = fun(a)
 num2 = fun(b)
