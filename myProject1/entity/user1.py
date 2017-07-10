@@ -3,14 +3,15 @@ from hashlib import md5
 
 
 class User(object):
-
     def __init__(self, usernames, first_name=None, last_name=None, email=None, password=None):
         self.usernames = usernames
         self.first_name = first_name
         self.last_name = last_name
-        self.email=email
-        self.password=password
-
+        self.email = email
+        if password:
+            self.set_password(password)
+        else:
+            self.password = None
 
     def get_username(self):
         return self.usernames
@@ -20,8 +21,6 @@ class User(object):
 
     def get_short_name(self):
         return self.first_name
-
-
 
     def _is_valid_username(self):
         if len(self.usernames) < 50:
@@ -54,13 +53,14 @@ class User(object):
             else:
                 return False
 
-    def set_password(self):
-        hesh = md5(self.password)
-        return hesh
-    
-    def _is_valid_password(hesh):
-        return False
-        
+    def set_password(self, password):
+        self.password = md5(password.encode())
+
+    def check_password(self, password):
+        return self.password == md5(password.encode())
+
+    def _is_valid_password(self):
+        return True if self.password else False
 
     def is_valid(self):
         errors = []
@@ -74,12 +74,11 @@ class User(object):
             errors.append("email")
         if not self._is_valid_password():
             errors.append("password")
-        
+
         return errors
 
 
-
-if  __name__ =='__main__':
+if __name__ == '__main__':
 
     users = [User(usernames="user.YURIY", first_name="YURIY", last_name="last.YURIY",
                   email="yuriy.semesyuk@yahoo.com"),
