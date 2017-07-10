@@ -19,13 +19,13 @@ class User(object):
     if len(self.username) < 50:
         for i in self.username:
             if i in ("_", "-", "@", ".", "+") or i.isdigit() or i.isalpha()
-                return True
+            return True
             return False
         else:
             return False
 
 if __name__ == '__name__':
-    user = [User(username=),
+    user = [User(username=)
 
 
 
