@@ -1,0 +1,46 @@
+Домашнє завдання № 9
+Створити папочку проекту:
+-в ньому створити створити пекедж Entity
+-в ньому створити клас User з полями:
+Fields:
+-username (Required. 50 characters or fewer. Usernames may contain alphanumeric, _, @, +, . and - characters.)
+-first_name (Optional. 30 characters or fewer.)
+-last_name (Optional. 30 characters or fewer.)
+-email (Optional. Email address.)
+-password (Required. 50 characters or fewer. Password must contain Letters, numbers, symbols ( _, @, +, . -))
+
+Methods:
+get_username() (Returns the username for the user)
+get_full_name() (Returns the first_name plus the last_name, with a space in between.)
+get_short_name() (Returns the first_name.)
+set_password(raw_password) (Sets the user’s password)
+check_password(raw_password) (Returns True if the given raw string is the correct password for the user.)
+is_valid() (Returns empty list, if all the fields are valid, else liste errors msg)
+
+Protected methods:
+_is_valid_username()
+_is_valid_first_name()
+_is_valid_last_name()
+_is_valid_email()
+_is_valid_password()
+
+створити  створити в коренні проекту файл manage.py
+імпортувати в нього класс User.
+створити масив з 4 юзерів.
+вивести username всіх користувачів і чи вони валідні, якщо ні то вивести які з полів не валідні.
+
+
+Домашнє завдання №2
+1)ств клас профайл який є похідним від класу юзер і містить поля:
+-дата нар
+-стать
+-аватар(стрінга нейм)
+
+Визн методи:
+-get_age
+-get_sax
+-1 property
+-get_avatar
+-get_birthday
+
+2)Ств профайли для 2-х користувачів. Вивести First i Lastname тих хто неповнолітні
