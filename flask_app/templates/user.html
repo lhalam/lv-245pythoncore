@@ -9,9 +9,11 @@
     {% for user in us %}
         <tr>
             <th>{{ user.id }}</th>
+            <th>{{ user.username }}</th>
             <th>{{ user.firstname }}</th>
             <th>{{ user.lastname }}</th>
-            <th>{{ user.age }}</th>
+            <th>{{ user.email }}</th>
+            <th>{{ user.password }}</th>
         </tr>
     {% endfor %}
 </table>

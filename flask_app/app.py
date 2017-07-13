@@ -15,9 +15,11 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False)
     firstname = db.Column(db.String(20), nullable=False)
     lastname = db.Column(db.String(20), nullable=False)
-    age = db.Column(db.Integer, nullable=True)
+    email = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(20), nullable=True)
     
 
 @app.route('/')
@@ -43,7 +45,7 @@ def user_add():
     if request.method == 'POST' and form.validate():
         user = User(firstname = form.firstname.data,
                     lastname = form.lastname.data,
-                    age = form.age.data)
+                    email = form.email.data)
         db.session.add(user)
         db.session.commit()
         return redirect('/user')
