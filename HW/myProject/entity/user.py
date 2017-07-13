@@ -4,7 +4,6 @@ class User(object):
         self.first_name = first_name
         self.last_name = last_name
 
-    
     def get_username(self):
         return self.username
 
@@ -18,13 +17,17 @@ class User(object):
         """
         if len(self.username) < 50:
             for i in self.username:
-                if not( i in ("_", "@", "+", ".", "-") or i.isdigit() or i.isalpha()):
+                if not (i in ("_", "@", "+", ".", "-") or i.isdigit() or i.isalpha()):
                     return False
             return True
         else:
             return False
 
-    def is_valid(self):
+    def is_valid(self) -> object:
+        """
+
+        :rtype: object
+        """
         errors = []
         if self._is_valid_username():
             errors.append("username")
@@ -39,8 +42,9 @@ if __name__ == '__main__':
              User(username="421563gfhj?desuif!!!!+.fbjds")]
     for user in users:
         # print user._is_valid_username()
-        print user.is_valid()
-    # t = "?"
-    # print t in ("_", "@", "+", ".", "-") 
-    # print t.isdigit()
-    # print t.isalpha()
+        print
+        user.is_valid()
+        # t = "?"
+        # print t in ("_", "@", "+", ".", "-")
+        # print t.isdigit()
+        # print t.isalpha()
