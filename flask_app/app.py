@@ -43,9 +43,11 @@ def user_get():
 def user_add():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(firstname = form.firstname.data,
+        user = User(username = form.username.data,
+                    firstname = form.firstname.data,
                     lastname = form.lastname.data,
-                    email = form.email.data)
+                    email = form.email.data,
+                    password = form.password.data)
         db.session.add(user)
         db.session.commit()
         return redirect('/user')

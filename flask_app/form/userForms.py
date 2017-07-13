@@ -5,4 +5,4 @@ class UserForm(Form):
     firstname= StringField('First name', [validators.Length(min=2, max=5)])
     lastname = StringField('Last name', [validators.Length(min=5, max=20)])
     email = StringField('email', [validators.email()])
-
+    password = StringField('password', [validators.Length(min=2, max=5)])
