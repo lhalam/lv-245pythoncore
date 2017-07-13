@@ -4,4 +4,3 @@ class User(object):
         self.name = name
     def __str__(self):
         return "name: {}".format(self.name)
-        
