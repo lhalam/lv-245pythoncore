@@ -1,6 +1,6 @@
 import os.path
 
-from flask import Flask, request, redirect,  render_template
+from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 from form.userForms import UserForm
@@ -8,7 +8,7 @@ from form.userForms import UserForm
 app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'myApp.sqlite')
 
 db = SQLAlchemy(app)
 
@@ -18,10 +18,11 @@ class User(db.Model):
     firstname = db.Column(db.String(20), nullable=False)
     lastname = db.Column(db.String(20), nullable=False)
     age = db.Column(db.Integer, nullable=True)
+
     
 
 @app.route('/')
-def hello_world():
+def index():
     return """
             <a href='http://localhost:5000/user'>user</a><br>
             <a href='http://localhost:5000/user/add'>add user</a><br>
