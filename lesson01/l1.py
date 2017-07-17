@@ -67,18 +67,94 @@
 # print round(2.123456789, 5), round(2.5), round(2.99), round(-2.99)
 # print a//b
 # print a%b
-print 9**2
-print 9**0.5
-print 9**-0.5
-print 0.5**-0.5
-# print (-10)**0.5
-# print (-10)**2.5
-def f(a):
-    a *= 2 
-    print a
-    
+# print 9**2
+# print 9**0.5
+# print 9**-0.5
+# print 0.5**-0.5
+# # print (-10)**0.5
+# # print (-10)**2.5
+# def f(a):
+#     a *= 2
+#     print a
+#
+#
+# c = 10
+# b = f(c)
+# print c, b
+# print help(list)
 
-c = 10
-b = f(c)
-print c, b
-print help(list)
+
+# class MyClass:
+#     i = 123
+#
+#     def f(self):
+#         return 'hello'
+#
+# print(MyClass.f)
+# x = MyClass()
+# print(x)
+
+# class Complex:
+#     def __init__(self, r, i):
+#         self.r = r
+#         self.i = i
+# x = Complex(3, 4)
+# x.r, x.i
+# x.counter = 1
+# while x.counter < 10:
+#     x.counter *= 2
+#     print(x.counter)
+# print(x.counter)
+# del x.counter
+# print(dir(x))
+
+# x.f()
+# print(x.f())
+# print(MyClass.f(x))
+# class C:
+#     pass
+#
+# class Dog(C):
+#     # kind = 'canine'
+#     tricks = []
+#     def __init__(self, name):
+#         self.name = name
+#     def add_trick(self, trick):
+#         self.tricks.append(trick)
+# f=  2
+# d = Dog('Fibo')
+# e = Dog('Buddy')
+# d.add_trick('roll over')
+# # print(dir(d))
+#
+# print(isinstance(d, Dog))
+# print(issubclass(C, Dog))
+
+# s = 'asd'
+# it = iter(s)
+# # print(it)
+#
+# print(next(it))
+
+# class Reverse:
+#     def __init__(self, data):
+#         self.data = data
+#         self.index = len(data)
+#     def __iter__(self):
+#         return self
+#     def __next__(self):
+#         if self.index == 0:
+#             raise StopIteration
+#         self.index -= 1
+#         return self.data[self.index]
+#
+# for i in Reverse('asdf'):
+#     print(i)
+
+# def reverse(data):
+#     for i in range(len(data)-1, -1, -1):
+#         yield data[i]
+#
+# print(reverse('asd'))
+
+# print(sum(i*i for i in range(10)))
