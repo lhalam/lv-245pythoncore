@@ -1,0 +1,19 @@
+<a href='http://localhost:5000/user/add'>add user</a><br>
+<table border>
+  <tr>
+    <th>id</th>
+    <th>username</th>
+    <th>first_namename</th>
+    <th>last_name</th>
+    <th>email</th>
+  </tr>
+    {% for user in us %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.username }}</th>
+            <th>{{ user.first_name }}</th>
+            <th>{{ user.last_name }}</th>
+            <th>{{ user.email }}</th>
+        </tr>
+    {% endfor %}
+</table>

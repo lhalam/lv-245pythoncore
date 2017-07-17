@@ -8,18 +8,21 @@ from form.userForms import UserForm
 app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'myApp.sqlite')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
 
 db = SQLAlchemy(app)
 
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(20), nullable=False)
-    lastname = db.Column(db.String(20), nullable=False)
-    age = db.Column(db.Integer, nullable=True)
+    username = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
+    first_name = db.Column(db.String(30), nullable=True)
+    last_name = db.Column(db.String(30), nullable=True)
+    email = db.Column(db.String(30), nullable=True)
 
     
+
 
 @app.route('/')
 def index():
@@ -42,9 +45,11 @@ def user_get():
 def user_add():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(firstname = form.firstname.data,
-                    lastname = form.lastname.data,
-                    age = form.age.data)
+        user = User(username = form.username.data,
+                    password = form.password.data,
+                    first_name = form.first_name.data,
+                    last_name = form.last_name.data,
+                    email = form.email.data)
         db.session.add(user)
         db.session.commit()
         return redirect('/user')
