@@ -15,8 +15,11 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(20), nullable=False)
-    lastname = db.Column(db.String(20), nullable=False)
+    username = db.Column(db.String(50), nullable=False)
+    firstname = db.Column(db.String(30), nullable=False)
+    lastname = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
     age = db.Column(db.Integer, nullable=True)
 
     
@@ -28,11 +31,6 @@ def index():
             <a href='http://localhost:5000/user/add'>add user</a><br>
             """
 
-@app.route('/test')
-def hello_world_test():
-    return 'test Hello, World!'
-
-
 @app.route('/user', methods=['GET'])
 def user_get():
     users = User.query.all()
@@ -42,8 +40,11 @@ def user_get():
 def user_add():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(firstname = form.firstname.data,
+        user = User(username = form.username.data,
+                    firstname = form.firstname.data,
                     lastname = form.lastname.data,
+                    email = form.email.data,
+                    password = form.password.data,
                     age = form.age.data)
         db.session.add(user)
         db.session.commit()
