@@ -6,12 +6,14 @@
     <th>lastname</th>
     <th>age</th>
   </tr>
-    {% for user in us %}
+    {% for user in users %}
         <tr>
             <th>{{ user.id }}</th>
             <th>{{ user.firstname }}</th>
             <th>{{ user.lastname }}</th>
             <th>{{ user.age }}</th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}'>info</a></th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}/delete'>delete</a></th>
         </tr>
     {% endfor %}
 </table>
