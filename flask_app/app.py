@@ -23,13 +23,13 @@ class User(db.Model):
     email = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(80), nullable=True)
 
-    @staticmethod
-    def get_by_id(user_id):
-        try:
-            user = User.query.get(user_id)
-            return user
-        except(Exception):
-            return None
+    # @staticmethod
+    # def get_by_id(user_id):
+    #     try:
+    #         user = User.query.get(user_id)
+    #         return user
+    #     except(Exception):
+    #         return None
 
 @app.route('/')
 def hello_world():
@@ -66,14 +66,14 @@ def user_add():
     # print("tesr")
     return render_template('user_add.html', form=form)
 
-@app.route('/user/<user_id>/delete', methods=['GET'])
-def user_del(user_id):
-    user = User.get_by_id(user_id)
-    if user:
-        db.session.delete(user)
-        db.session.commit()
-        return redirect('/user')
-    return render_template('error.html', msg_eror="not id {}".format(user_id))
+# @app.route('/user/<user_id>/delete', methods=['GET'])
+# def user_del(user_id):
+#     user = User.get_by_id(user_id)
+#     if user:
+#         db.session.delete(user)
+#         db.session.commit()
+#         return redirect('/user')
+#     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 if __name__ == "__main__":
     db.create_all()
