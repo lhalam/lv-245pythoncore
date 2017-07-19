@@ -28,7 +28,7 @@ class User(db.Model):
         try:
             user = User.query.get(user_id)
             return user
-        except:
+        except(Exception):
             return None
 
 @app.route('/')
