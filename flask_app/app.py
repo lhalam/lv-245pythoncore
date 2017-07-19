@@ -59,7 +59,6 @@ def user_add():
                     lastname=form.lastname.data,
                     email=form.email.data,
                     password=hashlib.md5(form.password.data.encode()).hexdigest())
-        print (user.password)
         db.session.add(user)
         db.session.commit()
         return redirect('/user')
