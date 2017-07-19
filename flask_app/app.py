@@ -23,6 +23,13 @@ class User(db.Model):
     email = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(80), nullable=True)
 
+    @staticmethod
+    def get_by_id(user_id):
+        try:
+            user = User.query.get(user_id)
+            return user
+        except:
+            return None
 
 @app.route('/')
 def hello_world():
