@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 class User(object):
     def __init__(self, username, password,  first_name=None, last_name=None, email=None):
         self.username = username
