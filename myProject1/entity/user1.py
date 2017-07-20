@@ -1,18 +1,18 @@
-from validate_email import validate_email
 from hashlib import md5
-from datetime import date
+from validate_email import validate_email
 
 class User(object):
 
-    def __init__(self, username, first_name=None, last_name=None, email=None, password=None):
+    def __init__(self, username, password, first_name=None, last_name=None, email=None):
         self.username = username
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
         if password:
             self.set_password(password)
         else:
             self.password = None
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+
 
     def set(self, username=None, first_name=None, last_name=None, email=None, password=None):
         self.username = username
@@ -91,93 +91,9 @@ class User(object):
             errors.append("password")
 
         return errors
-#
-
-class Profaile(User):
-
-    def __init__(self, sex=None, date_of_birth=None, avatar=None):
-        self.sex=sex
-        self.date_of_birth=date_of_birth
-        self.avatar=avatar
-
-    def set(self, username=None, first_name=None, last_name=None, email=None, password=None,
-            sex=None, date_of_birth=None, avatar=None):
-        self.username = username
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        if password:
-            self.set_password(password)
-        else:
-            self.password = None
-        self.sex = sex
-        self.date_of_birth = date_of_birth
-        self.avatar = avatar
-
-
-
-
-
-    def get_sex(self):
-        return self.sex
-
-    def get_date_of_birth(self):
-        return self.date_of_birth
-
-    def get_avatar(self):
-        return self.avatar
-
-    def get_profile(self):
-        prof = {"Username:  " : self.username,
-                "Full Name: " : self.first_name,
-                #"Age:       " : self.get_age(),
-                "Email:     " : self.email,}
-                #"Sex:       " : self.sex,
-                #"Birth:     " : self.date_of_birth,
-                #"Avatar:    " : self.avatar}
-        return prof
-
-
-
-
-               #
-               #"Birth:     " : self.date_of_birth,
-               #"Avatar:    " : self.avatar
-
-    def get_age(self):
-        if len(self.date_of_birth)<=3:
-            y=0
-            m=0
-            d=0
-            z=0
-            for i in self.date_of_birth:
-                if z == 0:
-                    year = i
-                if z == 1:
-                    month = i
-                if z == 2:
-                    day = i
-                z += 1
-            birth_date = date(year, month, day)
-            today = date.today()
-            years = today.year - birth_date.year
-            if (today.month - birth_date.month) > 0:
-                return years
-            elif (today.day - birth_date.day) > 0:
-                return years
-            else:
-                return years -1
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
-
-
     users = [User(username="user_YURIY", first_name="YURIY", last_name="last_YURIY",
                   email="yuriy.semesyuk@yahoo.com", password="abcd12344"),
              User(username="user_TANYA", first_name="TANYA", last_name="last_TANYA",
@@ -187,30 +103,31 @@ if __name__ == '__main__':
              User(username="user_KATYA", first_name="KATYA", last_name="last_KATYA",
                   email="KATYA@yahoo.com", password="bhrt")]
 
-    profailes = [Profaile(sex="men1", date_of_birth="20.04.1991", avatar="foto1"),
-                 Profaile(sex="men2", date_of_birth="20.04.1992", avatar="foto2"),
-                 Profaile(sex="men3", date_of_birth="20.04.1993", avatar="foto3"),
-                 Profaile(sex="men4", date_of_birth="20.04.1994", avatar="foto4")]
+    profiles = [Profile(sex="men1", date_of_birth=(1993, 4, 29), avatar="foto1"),
+                Profile(sex="men2", date_of_birth=(1993, 7, 29), avatar="foto2"),
+                Profile(sex="men3", date_of_birth=(1993, 1, 29), avatar="foto3"),
+                Profile(sex="men4", date_of_birth=(1993, 12, 28), avatar="foto4")]
 
-    ihor = Profaile(sex="men", date_of_birth="29323923923", avatar="sfssff")
-    print(ihor.get_sex())
-    print(ihor.get_birth())
-    print(ihor.get_avatar())
+    ihor = Profile()
+    ihor.set(username="user_YURIY", first_name="YURIY", last_name="last_YURIY",
+             email="yuriy.semesyuk@yahoo.com", password="abcd12344",
+             sex="men", date_of_birth=(2000, 4, 29), avatar="foto")
 
-    ihor = User(username="user_44YURIY", first_name="YUR44IY", last_name="last_Y44URIY", email="yuriy.semesyuk@y44ahoo.com", password="abc44d12344")
-    print(ihor.username, ihor.first_name, ihor.last_name, ihor.email, ihor.password)
+    for i in ihor.get_profile():
+        print(i, ihor.get_profile()[i])
 
-    for user in users:
-        print(user.get_username())
-        print(user.is_valid())
+        # for user in users:
+        # print(user.get_username())
+        # print(user.is_valid())
         # print(user.get_full_name())
         # print(user.get_short_name())
         # print(user._is_valid_email())
         # print(user._is_valid_username())
-        # print(user._is_valid_first_name())
+        # print(user._is_valid_first_name())(1993, 5, 24)
         # print(user._is_valid_last_name())
 
-    for profaile in profailes:
-        print(profaile.get_sex(), profaile.get_birth(), profaile.get_avatar())
-
+    for profile in profiles:
+        print(profile.get_sex())
+        print(profile.get_date_of_birth())
+        print(profile.get_age())
     print("++++++++++++++++++++++++++++++++++++")
