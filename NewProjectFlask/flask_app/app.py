@@ -12,16 +12,50 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'my
 
 db = SQLAlchemy(app)
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(30), nullable=False)
     password = db.Column(db.String(50), nullable=False)
-    first_name = db.Column(db.String(30), nullable=True)
-    last_name = db.Column(db.String(30), nullable=True)
-    email = db.Column(db.String(30), nullable=True)
 
-    
+    @staticmethod
+    def get_by_id(user_id):
+        try:
+            user = User.query.get(user_id)
+            return Profile
+        except Exception, e:
+            return None
+
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    bday = db.Column(db.String(30), nullable=True)
+    sex = db.Column(db.String(5), nullable=True)
+    city = db.Column(db.String(30), nullable=True)
+    zip_code = db.Column(db.Integer, nullable=True)
+    phone = db.Column(db.Integer, nullable=True)
+
+    @staticmethod
+    def get_by_id(user_id):
+        try:
+            profile = Profile.query.get(user_id)
+            return profile
+        except Exception, e:
+            return None
+            
+    @staticmethod
+    def get_by_user_id(user_id):
+        try:
+            profile = Profile.query.filter_by(user_id=user_id).first()
+            return profile
+        except Exception, e:
+            return None
+
+class Contacts(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    owner = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
 
 @app.route('/')
 def index():
@@ -46,7 +80,7 @@ def user_add():
     if request.method == 'POST' and form.validate():
         user = User(username = form.username.data,
                     password = form.password.data,
-                    first_name = form.first_name.data.
+                    first_name = form.first_name.data,
                     last_name = form.last_name.data,
                     email = form.email.data)
         db.session.add(user)
