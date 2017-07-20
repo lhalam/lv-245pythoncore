@@ -74,6 +74,17 @@ def user_get():
     users = User.query.all()
     return render_template('user.html', us=users)
 
+# @app.route('/user/<user_id>', methods=['GET'])
+# def user_get(user_id):
+#     users = User.get_by_id(user_id)
+#     if user:
+
+#     return render_template('user.html', us=users)
+
+@app.route('/user/<user_id>/profile', methods=['GET','POST'])
+def profile_post_get(user_id):
+    form = 
+
 @app.route('/user/add', methods=['GET','POST'])
 def user_add():
     form = UserForm(request.form)
