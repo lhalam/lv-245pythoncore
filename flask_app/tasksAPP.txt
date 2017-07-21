@@ -16,7 +16,6 @@ Profile
     phone (int)
 
 Contacts
-    id
     owner (user_id)
     user_id
 
