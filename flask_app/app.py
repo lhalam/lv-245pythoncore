@@ -33,15 +33,11 @@ class User(db.Model):
 
 @app.route('/')
 def hello_world():
-    return """
-            <a href='http://localhost:5000/user'>user</a><br>
-            <a href='http://localhost:5000/user/add'>add user</a><br>
-            """
-
-
-@app.route('/test')
-def hello_world_test():
-    return 'test Hello, World!'
+    # return """
+    #         <a href='http://localhost:5000/user'>user</a><br>
+    #         <a href='http://localhost:5000/user/add'>add user</a><br>
+    #         """
+    return render_template('main.html')
 
 
 @app.route('/user', methods=['GET'])

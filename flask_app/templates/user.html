@@ -4,11 +4,6 @@
    <p><a href='http://localhost:5000'>← back to main</a></p>
 </body>
 
-<!--<head>-->
-    <!--<title>Flask app</title>-->
-    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">-->
-<!--</head>-->
-
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;border-color:#bbb;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#bbb;color:#594F4F;background-color:#E0FFEB;}
@@ -18,8 +13,13 @@
 </style>
 
 <table class="tg">
-    <tr><a href='http://localhost:5000/user/add'>add user</a><br>
-        <th class="tg-q19q">id</th>
+    <p>
+    <form action='http://localhost:5000/user/add'>
+    <button type="submit">add new user</button>
+    </form>
+    </p>
+    <tr>
+        <th class="tg-yw4l">id</th>
         <th class="tg-yw4l">username</th>
         <th class="tg-yw4l">firstname</th>
         <th class="tg-yw4l">lastname</th>
