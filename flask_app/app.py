@@ -28,6 +28,9 @@ class User(db.Model):
         except Exception:
             return None
 
+    def __repr__(self):
+        return "{} {}".format(self.id, self.firstname)
+
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
@@ -138,18 +141,21 @@ def profile_post_get(user_id):
     # print form.errors
     return render_template('profile_add.html', form=form)
 
-@app.route('/profile/<user_id>/delete', methods=['GET'])
-def profile_del(user_id):
-    profile = Profile.get_by_id(user_id)
+@app.route('/profile/<profile_id>/delete', methods=['GET'])
+def profile_del(profile_id):
+    profile = Profile.get_by_id(profile_id)
+    user_id = profile.user_id
     if profile:
         db.session.delete(profile)
         db.session.commit()
-        return redirect('/user/user_id')#<----------------------------------------------------------------------------------
+        return redirect('/user/{}'.format(user_id))#<----------------------------------------------------------------------------------
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 @app.route('/user/<user_id>/contact', methods=['GET'])
 def contact(user_id):
     users = User.query.all()
+    users = [user for user in users if not user.id == int(user_id)]
+        
 
     if request.method == "GET":
         return render_template('contact_list.html', users=users)
