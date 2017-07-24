@@ -153,29 +153,6 @@ def contact(user_id):
 
     if request.method == "GET":
         return render_template('contact_list.html', users=users)
-    if request.method == 'POST' and form.validate():
-        user.firstname = form.firstname.data
-        user.lastname = form.lastname.data
-        user.age = form.age.data
-        db.session.add(user)
-        db.session.commit()
-    return render_template('user_info.html', user=user, profile=profile, form=form)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
