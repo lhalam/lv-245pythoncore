@@ -4,6 +4,7 @@ import hashlib
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from form.userForms import UserForm
+from form.profileForm import ProfileForm
 
 app = Flask(__name__)
 
@@ -86,6 +87,21 @@ def user_del(user_id):
         db.session.commit()
         return redirect('/user')
     return render_template('error.html', msg_eror="not id {}".format(user_id))
+
+
+@app.route('/user/<user_id>/profile', methods=['GET','POST'])
+def profile_post_get(user_id):
+    form = ProfileForm(request.form)
+    if request.method == 'POST' and form.validate():
+        profile = Profile(user_id=user_id,
+                          city=form.city.data,
+                          zip_code=form.zip_code.data)
+        db.session.add(profile)
+        db.session.commit()
+        _url = '/user/' + str(user_id)
+        return redirect(_url)
+    # print form.errors
+    return render_template('profile_add.html', form=form)
 
 @app.route('/user/<user_id>/info', methods=['GET'])
 def users_info(user_id):
