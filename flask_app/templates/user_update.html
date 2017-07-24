@@ -1,9 +1,13 @@
+<body bgcolor="#c0c0c0" background="http://data2.1freewallpapers.com/download/colored-pencils-colors-paint-1366x768.jpg"
+  bgproperties="fixed">
+   <!--<p>...</p>-->
+</body>
 {% from "_formhelpers.html" import render_field %}
 <form method=put>
   <dl>
     {{ render_field(form.firstname) }}
     {{ render_field(form.lastname) }}
-    {{ render_field(form.age) }}
+    <!--{{ render_field(form.age) }}-->
   </dl>
   <p><input type=submit value=Register>
 </form>

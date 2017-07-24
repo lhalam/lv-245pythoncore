@@ -33,7 +33,8 @@
         <td class="tg-yw4l">{{ user.email }}</td>
         <td class="tg-yw4l">{{ user.password }}</td>
         <td class="tg-yw4l"><a href='http://localhost:5000/user/{{user.id}}/delete'>delete</a></td>
-        <td class="tg-yw4l"><form action='http://localhost:5000/user/{{ user.id }}/info'><button type="submit">Profile</button></form></td>
+        <td class="tg-yw4l"><form action='http://localhost:5000/user/{{ user.id }}/profile'><button type="submit">add profile</button></form></td>
+        <td class="tg-yw4l"><form action='http://localhost:5000/user/{{ user.id }}/edit'><button type="submit">edit profile</button></form></td>
     </tr>
     {% endfor %}
 </table>
