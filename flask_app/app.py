@@ -60,7 +60,11 @@ def hello_world():
 @app.route('/user', methods=['GET'])
 def user_get():
     users = User.query.all()
-    return render_template('user.html', us=users)
+    pro = []
+    for user in users:
+        user.profile = Profile.get_by_user_id(user.id)
+        pro.append(user)
+    return render_template('user.html', us=pro)
 
 
 @app.route('/user/add', methods=['GET', 'POST'])
@@ -100,7 +104,7 @@ def user_update(user_id):
             form.lastname.data = user.lastname
             form.email.data = user.email
         if request.method == 'POST' and form.validate():
-            form.username.data = user.username
+            user.username = form.username.data
             user.firstname = form.firstname.data
             user.lastname = form.lastname.data
             user.email = form.email.data
@@ -113,6 +117,7 @@ def user_update(user_id):
 @app.route('/user/<user_id>/profile', methods=['GET','POST'])
 def profile_post_get(user_id):
     form = ProfileForm(request.form)
+    print  form.validate()
     if request.method == 'POST' and form.validate():
         profile = Profile(user_id=user_id,
                           city=form.city.data,
@@ -120,9 +125,9 @@ def profile_post_get(user_id):
                           phone=form.phone.data)
         db.session.add(profile)
         db.session.commit()
-        _url = '/user/' + str(user_id)
+        _url = '/user/' + str(user_id) + "/edit"
         return redirect(_url)
-    # print form.errors
+    print form.errors
     return render_template('profile_add.html', form=form)
 
 if __name__ == "__main__":
