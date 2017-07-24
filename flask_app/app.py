@@ -89,6 +89,26 @@ def user_del(user_id):
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 
+@app.route('/user/<user_id>', methods=['GET','POST'])
+def user_update(user_id):
+    user = User.get_by_id(user_id)
+    if user:
+        profile = Profile.get_by_user_id(user.id)
+        form = UserForm(request.form)
+        if request.method == 'GET':
+            form.firstname.data = user.firstname
+            form.lastname.data = user.lastname
+            form.age.data = user.age
+        if request.method == 'POST' and form.validate():
+            user.firstname = form.firstname.data
+            user.lastname = form.lastname.data
+            user.age = form.age.data
+            db.session.add(user)
+            db.session.commit()
+        return render_template('user_info.html', user=user, profile=profile, form=form)
+    return render_template('error.html', msg_eror="not id {}".format(user_id))
+
+
 @app.route('/user/<user_id>/profile', methods=['GET','POST'])
 def profile_post_get(user_id):
     form = ProfileForm(request.form)
@@ -104,11 +124,11 @@ def profile_post_get(user_id):
     return render_template('profile_add.html', form=form)
 
 @app.route('/user/<user_id>/info', methods=['GET'])
-def users_info(user_id):
+def users_info_one(user_id):
     u = User.query.all()
     p = Profile.get_by_user_id(user_id)
 
-    return render_template('users_info.html',users=u, profile=p)
+    return render_template('users_info_one.html',users=u, profile=p)
 
 if __name__ == "__main__":
     db.create_all()
