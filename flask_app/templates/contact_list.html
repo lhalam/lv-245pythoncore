@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/static/css/style.css">
+<div id="main">
+    <div id="menu">
+<a href='http://localhost:5000/'>main page</a><br>
+    </div>
+<div id="content">
+<table border>
+  <tr>
+    <th>id</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>age</th>
+  </tr>
+    {% for user in users %}	    
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.firstname }}</th>
+            <th>{{ user.lastname }}</th>
+            <th>{{ user.age }}</th>
+			<th><a href='http://localhost:5000/contact/{{ user.id }}/add'>add</a></th>
+          
+        </tr>
+    {% endfor %}
+</table>
+</div>
+</div>

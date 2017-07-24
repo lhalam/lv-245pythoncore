@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/static/css/style.css">
+<div id="main">
+    <div id="menu">
+<a href='http://localhost:5000/user'>user list</a><br>
+</div>
+<div id="content">
+{% from "_formhelpers.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.firstname) }}
+    {{ render_field(form.lastname) }}
+    {{ render_field(form.age) }}
+  </dl>
+  <p><input type=submit value=Update>
+</form>
+{% if profile %}
+<div>
+    city: {{ profile.city }} <br>
+    zip_code: {{ profile.zip_code }}
+</div>
+<a href='http://localhost:5000/profile/{{ profile.id}}/delete'>delete profile</a></br>
+{% elif not profile%}
+<a href='http://localhost:5000/user/{{ user.id }}/profile'>add profile</a><br>
+{% endif %}
+</dir>
+</div>

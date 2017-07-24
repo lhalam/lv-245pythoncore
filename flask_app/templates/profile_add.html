@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/static/css/style.css">
+<div id="main">
+    <div id="menu">
+<a href='http://localhost:5000/user'>user list</a><br>
+    </div>
+<div id="content">
+{% from "_formhelpers.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.city) }}
+    {{ render_field(form.zip_code) }}
+  </dl>
+  <p><input type=submit value=Update>
+</form>
+</div>
+</div>
