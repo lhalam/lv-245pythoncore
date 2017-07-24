@@ -88,11 +88,11 @@ def user_del(user_id):
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 @app.route('/user/<user_id>/info', methods=['GET'])
-def users_info_one(user_id):
+def users_info(user_id):
     u = User.query.all()
     p = Profile.get_by_user_id(user_id)
 
-    return render_template('users_info_one.html',users=u, profile=p)
+    return render_template('users_info.html',users=u, profile=p)
 
 if __name__ == "__main__":
     db.create_all()
