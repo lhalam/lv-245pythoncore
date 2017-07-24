@@ -29,6 +29,29 @@ class User(db.Model):
         except(Exception):
             return None
 
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    city = db.Column(db.String(20), nullable=True)
+    zip_code = db.Column(db.Integer, nullable=True)
+    phone = db.Column(db.Integer, nullable=True)
+
+    @staticmethod
+    def get_by_id(user_id):
+        try:
+            profile = Profile.query.get(user_id)
+            return profile
+        except Exception as e:
+            return None
+
+    @staticmethod
+    def get_by_user_id(user_id):
+        try:
+            profile = Profile.query.filter_by(user_id=user_id).first()
+            return profile
+        except Exception as e:
+            return None
+
 @app.route('/')
 def hello_world():
     return render_template('main.html')
