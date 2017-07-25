@@ -1,0 +1,22 @@
+<a href='http://localhost:5000/user/'>users</a><br>
+<table border>
+    <tr>
+        <th>owner_id</th>
+        <th>user_id</th>
+    </tr>
+    {% if contacts%}
+        {% for contact in contacts %}
+            <tr>
+                <th>{{ contact.owner_id }}</th>
+                <th>{{ contact.user_id }}</th>
+            </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+{% if users%}
+    {% for user in users %}
+        {{ user.id }}
+        <a href='http://localhost:5000/user/{{ owner_id }}/contact?user_id={{user.id}}'>add</a>
+        <br>
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,14 @@
+<body bgcolor="#c0c0c0" background="https://wallpaperscraft.ru/image/ruchka_tetrad_kletochka_formuly_uchba_80658_1366x768.jpg"
+bgproperties="fixed">
+</body>
+{% from "_formhelpers.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.first_name) }}
+    {{ render_field(form.last_name) }}
+    {{ render_field(form.email) }}
+  </dl>
+  <p><input type=submit value=Register>
+</form>

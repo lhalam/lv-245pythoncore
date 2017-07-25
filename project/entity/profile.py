@@ -2,7 +2,11 @@
 import datetime
 from user import User
 
+<<<<<<< HEAD
 class Profile(User):
+=======
+class Profile(object):
+>>>>>>> master
 
     def __init__(self, username, password, first_name=None, last_name=None,
                 email=None, date_of_birthday=None, sex=None, avatar=None):
@@ -13,10 +17,17 @@ class Profile(User):
         self.avatar = avatar
 
 
+<<<<<<< HEAD
     def get_age(self):
         today = datetime.date.today()
         age = today - datetime.date.today()
         return age.days/365
+=======
+    def get_age(selfself):
+        today = datetime.date.today()
+        age = today - datetime.date.today()
+        return age
+>>>>>>> master
 
     def get_sex(self):
         return self.sex
@@ -27,6 +38,7 @@ class Profile(User):
     def get_birthday(self):
         return self.date_of_birthday
 
+<<<<<<< HEAD
     def is_adult(self):
         if self.get_age() < 18:
             print self.first_name, self.last_name
@@ -50,6 +62,23 @@ if __name__ == '__main__':
     for user in users:
         if user.is_adult():
             print user
+=======
+    def _is_adult(self):
+        if self.get_age() < 18:
+            print self.first_name, self.last_name
+        else:
+            return False
+
+
+    if __name__== '__main__':
+        users = [Profile(username="Sasha", password="sd23-+w", first_name="Oleksandr", last_name="Danuliv",
+                 email="dina@m.com", date_of_birthday="1989, 10, 03", sex="men", avatar="dcsl"),
+                 Profile(username="Katerine", password="psd._", first_name="Kate", last_name="Kislova",
+                 email="oleh.@gml.com", date_of_birthday="1999, 06, 12", sex="women", avatar="adress")]
+        for User in users:
+            if user.adult():
+                print user
+>>>>>>> master
 
 
 

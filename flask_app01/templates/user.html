@@ -1,0 +1,31 @@
+<body bgcolor="#c0c0c0" background="https://wallpaperscraft.ru/image/ruchka_tetrad_kletochka_formuly_uchba_80658_1366x768.jpg" bgproperties="fixed">
+<p><a href='http://localhost:5000'>← back to main</a></p>
+</body>
+
+<a href='http://localhost:5000/user/add'>add user</a><br>
+<table border>
+  <tr>
+    <th>id</th>
+    <th>username</th>
+    <th>first_name</th>
+    <th>last_name</th>
+    <th>email</th>
+  </tr>
+    {% for user in users %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.username }}</th>
+            <th>{{ user.first_name }}</th>
+            <th>{{ user.last_name }}</th>
+            <th>{{ user.email }}</th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}/contact'>contacts</a></th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}'>edit</a></th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}/delete'>delete</a></th>
+             {% if not user.profile %}
+            <td class="tg-yw4l"><form action='http://localhost:5000/user/{{ user.id }}/profile'><button style="background-color: red;color: black;" type="submit">add profile</button></form></td>
+            {% else %}
+            <td class="tg-yw4l"><form action='http://localhost:5000/user/{{ user.id }}/edit'><button color="red" type="submit">edit profile</button></form></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>

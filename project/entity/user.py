@@ -18,11 +18,19 @@ class User(object):
         return self.first_name
 
     def set_password(self, raw_password):
+<<<<<<< HEAD
         self.password = raw_password[::-1]
         
 
     def check_password(self, raw_password):
         if self.password == raw_password[::-1]:
+=======
+        self.password = raw_password
+        
+
+    def check_password(self, raw_password):
+        if self.password == raw_password:
+>>>>>>> master
             return True
         else:
             return False
@@ -54,6 +62,7 @@ class User(object):
             return False
 
     def _is_valid_email(self):
+<<<<<<< HEAD
         #l@l.l
         b1, a1 = self.email.split('@')
         if len(b1) > 0:
@@ -65,6 +74,12 @@ class User(object):
         #     return True
         # else:
         #     return False
+=======
+        if self.email == "." and "@" in self.email:
+            return True
+        else:
+            return False
+>>>>>>> master
     # !Завжди виходить False
 
 
@@ -113,7 +128,11 @@ if __name__ == '__main__':
         # print user.get_full_name()
         # print user.check_password("nksm21")
         # print user.check_password("nksm21")
+<<<<<<< HEAD
         # print user._is_valid_password()
+=======
+        print user._is_valid_password()
+>>>>>>> master
 
         # t = "?"
         # print t in ("_", "@", "+", ".", "-")
