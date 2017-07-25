@@ -1,4 +1,7 @@
-<a href='http://localhost:5000/user'>User list</a><br>
+<body bgcolor="#c0c0c0" background="http://data2.1freewallpapers.com/download/colored-pencils-colors-paint-1366x768.jpg"
+  bgproperties="fixed">
+   <!--<p>...</p>-->
+</body><a href='http://localhost:5000/user'>← back to users</a><br>
 {% from "_formhelpers.html" import render_field %}
 <form method=post>
   <dl>
@@ -7,11 +10,12 @@
 
   </dl>
   <p><input type=submit value=Update>
+
 </form>
 {% if profile %}
 <div>
     city: {{ profile.city }} <br>
-    zip_code: {{ profile.zip_code }}
+    zip_code: {{ profile.zip_code }} <br>
     phone:{{profile.phone}}
 </div>
 {% endif %}

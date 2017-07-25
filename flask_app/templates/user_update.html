@@ -5,9 +5,11 @@
 {% from "_formhelpers.html" import render_field %}
 <form method=put>
   <dl>
+    {{ render_field(form.username) }}
     {{ render_field(form.firstname) }}
     {{ render_field(form.lastname) }}
-    <!--{{ render_field(form.age) }}-->
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
   </dl>
   <p><input type=submit value=Register>
 </form>

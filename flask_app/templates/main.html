@@ -1,42 +1,81 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>Main page</title>
-    <link rel="stylesheet" href="http://htmlbook.ru/style/lion.css">
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-</head>
-<body bgcolor="#c0c0c0" background="https://img3.goodfon.ru/original/1366x768/4/b6/tetrad-karandashi.jpg" bgproperties="fixed"></body>
-<center>
-<header>
-   <div class="header-bg">
-    <img src="https://cdn1.iconfinder.com/data/icons/book_mac/512/Address_Book.png" alt="Adress book"
-              width="310" height="310">
-   </div>
-  </header>
-    <div class="content-gradient">
-        <div class="content-bg">
-            <div class="content-white">
-                <section>
-                    <header><h1><a href='http://localhost:5000/user'>Adress book</a></h1></header>
-                </section>
-                <p>
-                   Адресна книга призначена для зберігання різних відомостей про адресатів, які можуть легко використовуватися системою Microsoft Outlook Express. У цій книзі можна зберігати всі потрібні адреси електронної пошти, домашні та службові адреси, номери телефонів і факсів тощо. Якщо необхідно, можна внести на сторінку нотаток будь-яку додаткову інформацію. Адресна книга забезпечує також доступ до служб каталогів Інтернета, за допомогою яких можна вести пошук потрібних людей та організацій у мережі Інтернет.
-                </p>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <img src="https://www.shkolnaya-karta.ru/public/images/library_teachers/book.png" alt="" width="130" height="80" class="lion">
-        <div class="footer-bg">
-            <div class="copyright">
-                <p><strong>Training Site - "PythonCore course"</strong></p>
-                <p>&copy; Sereda Ihor</p>
-            </div>
-        </div>
-    </footer>
-</center>
-</body>
+ <head>
+  <meta charset="utf-8">
+  <title>Adress book</title>
+  <style>
+   body {
+    font: 11pt Arial, Helvetica, sans-serif; /* Рубленый шрифт текста */
+    margin: 0; /* Отступы на странице */
+   }
+   h1 {
+    font-size: 36px; /* Размер шрифта */
+    margin: 0; /* Убираем отступы */
+    color: #fff; /* Цвет текста */
+
+   }
+   h2 {
+    margin-top: 0; /* Убираем отступ сверху */
+   }
+   #header { /* Верхний блок */
+    /*background: #0080c0; /* Цвет фона */
+    background: #9DE0AD; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+   }
+   #sidebar { /* Левая колонка */
+    float: left; /* Обтекание справа */
+    width: 20%; /* Ширина колонки */
+    padding: 5px; /* Поля вокруг текста */
+    margin: 10px 10px 20px 5px; /* Значения отступов */
+   }
+   #content { /* Правая колонка */
+    margin: 10px 5px 20px 25%; /* Значения отступов */
+    padding: 5px; /* Поля вокруг текста */
+
+   }
+   #footer {
+    position: fixed; /* Фиксированное положение */
+    left: 0; bottom: 0; /* Левый нижний угол */
+    padding: 10px; /* Поля вокруг текста */
+    background: #9DE0AD; /* Цвет фона */
+    color: #fff; /* Цвет текста */
+    width: 100%; /* Ширина слоя */
+   }
+  </style>
+ </head>
+ <body>
+ <body bgcolor="#c0c0c0" background="https://img3.goodfon.ru/original/1366x768/4/b6/tetrad-karandashi.jpg" bgproperties="fixed"></body>
+  <div id="header"><h1> My adress book 2.0 </h1></div>
+   <div id="sidebar">
+    <p><a href='http://localhost:5000/user'>Адресати</a></p>
+    <p><a href="https://my.softserve.ua/technology">Academy</a></p>
+    <p><a href="https://www.facebook.com/ihor.sereda.3">Автор</a></p>
+  </div>
+  <div id="content">
+    <h2> Зручне місце для зберігання відомостей про людей </h2>
+    <p> My address book — вбудована прикладна програма для збереження контактної інформації, створена компанією Apple Inc. Входить до стандартної поставки Mac OS X. Представляє собою централізоване сховище контактної інформації. Характерною рисою даної програми є інтеграція та синхронізація з багатьма іншими прикладними програмами та функціями macOS. Після виходу OS X Mountain Lion програма отримала назву Contacts (Контакти). Остання версія комп'ютеризованої адресної книги, включеної в MacOS, - Contacts 10.0
+    </p>
+    <p>Можливості програми:
+      <ul>
+      <li>Інтеграція з більшістю прикладних програм для Mac OS X, з Mail, iCal, iChat, Safari, FaceTime та іншими.</li>
+      <li>Синхронізація з КПК, iPod, iPhone, іншим Mac’ом або з Інтернет-порталами — MobileMe, Yahoo!, Google.</li>
+      <li>Надання стороннім розробникам API для доступу до адресної книги користувача.</li>
+      <li>Підтримка імпорту та експорту контактів у форматі vCard.</li>
+      <li>Наявність C та Objective-C програмного інтерфейсу.</li>
+      <li>Автоматичне форматування номерів телефонів за заданими шаблонами.</li>
+      <li>Відображення адрес контактів на Google Maps.</li>
+      <li>Систематизація контактів: папки, групи, смарт-групи.</li>
+      <li>Пошук контактів або контактної інформації.</li>
+      <li>Сортування контактів: за іменем або прізвищем.</li>
+      <li>Архівування адресної книги.</li>
+      <li>Картки адресної книги можуть відображати файли наступних форматів: JPEG, GIF, TIFF, PNG і PDF.</li>
+      </ul>
+    </p>
+  </div>
+  <div id="footer">&copy; Sereda Ihor</div>
+ </div>
+  <div id="footer">
+   &copy; Середа Ігор
+  </div>
+ </body>
 </html>

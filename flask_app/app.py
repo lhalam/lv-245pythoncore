@@ -117,7 +117,7 @@ def user_update(user_id):
 @app.route('/user/<user_id>/profile', methods=['GET','POST'])
 def profile_post_get(user_id):
     form = ProfileForm(request.form)
-    print  form.validate()
+    # print  form.validate()
     if request.method == 'POST' and form.validate():
         profile = Profile(user_id=user_id,
                           city=form.city.data,
@@ -127,7 +127,7 @@ def profile_post_get(user_id):
         db.session.commit()
         _url = '/user/' + str(user_id) + "/edit"
         return redirect(_url)
-    print form.errors
+    # print form.errors
     return render_template('profile_add.html', form=form)
 
 if __name__ == "__main__":
