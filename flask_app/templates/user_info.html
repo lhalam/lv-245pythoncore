@@ -1,0 +1,19 @@
+<a href='http://localhost:5000/user'>User list</a><br>
+{% from "_formhelpers.html" import render_field %}
+<form method=POSt>
+  <dl>
+    {{ render_field(form.firstname) }}
+    {{ render_field(form.lastname) }}
+    {{ render_field(form.email) }}
+    <!--{{ render_field(form.password) }}-->
+  </dl>
+  <p><input type=submit value=Update>
+</form>
+{% if profile %}
+<div>
+    city: {{ profile.city }} <br>
+    zip_code: {{ profile.zip_code }}
+</div>
+{% endif %}
+
+<a href='http://localhost:5000/user/{{ user.id }}/profile'>add profile</a>
