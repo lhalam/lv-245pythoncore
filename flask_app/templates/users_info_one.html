@@ -15,8 +15,8 @@
                         <th>{{ user.id }}</th>
                         <th>{{ user.firstname }}</th>
                         <th>{{ user.lastname }}</th>
-                        <th>{{ render_field(form.email) }}</th>
-                        <th>{{ render_field(form.password) }}</th>
+                        <th>{{ user.email }}</th>
+                        <th>{{ user.password }}</th>
                         <th><a href='http://localhost:5000/user/{{ user.id }}/info'>info</a></th>
                         <th><a href='http://localhost:5000/user/{{ user.id }}'>edit</a></th>
                         <th><a href='http://localhost:5000/user/{{ user.id }}/delete'>delete</a></th>
@@ -27,8 +27,11 @@
         <td>
             {% if profile %}
             <div>
+                birthday: {{ profile.birthday }} <br>
+                sex: {{ profile.sex }}
                 city: {{ profile.city }} <br>
-                zip_code: {{ profile.zip_code }}
+                zip_code: {{ profile.zip_code }} <br>
+                phone: {{ profile.phone }} <br>
             </div>
             {% endif %}
         </td>

@@ -1,8 +1,11 @@
 {% from "_formhelpers.html" import render_field %}
 <form method=post>
   <dl>
+    {{ render_field(form.birthday) }}
+    {{ render_field(form.sex) }}
     {{ render_field(form.city) }}
     {{ render_field(form.zip_code) }}
+    {{ render_field(form.phone) }}
   </dl>
   <p><input type=submit value=Update>
 </form>

@@ -33,8 +33,11 @@ class User(db.Model):
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
+    birthday = db.Column(db.String(20), nullable=True)
+    sex = db.Column(db.String(20), nullable=True)
     city = db.Column(db.String(20), nullable=True)
     zip_code = db.Column(db.Integer, nullable=True)
+    phone = db.Column(db.Integer, nullable=True)
 
     @staticmethod
     def get_by_id(user_id):
@@ -166,8 +169,11 @@ def profile_post_get(user_id):
     form = ProfileForm(request.form)
     if request.method == 'POST' and form.validate():
         profile = Profile(user_id=user_id,
+                          birthday=form.birthday.data,
+                          sex=form.sex.data,
                           city=form.city.data,
-                          zip_code=form.zip_code.data)
+                          zip_code=form.zip_code.data,
+                          phone = form.phone.data,)
         db.session.add(profile)
         db.session.commit()
         _url = '/user/' + str(user_id)
