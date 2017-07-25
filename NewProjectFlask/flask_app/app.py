@@ -55,8 +55,21 @@ class Profile(db.Model):
 
 class Contacts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    owner = db.Column(db.Integer, nullable=False)
+    owner_id = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, nullable=False)
+
+    @staticmethod
+    def create(owner_id, user_id):
+        contact = Contacts(owner_id = owner_id,
+                          user_id = user_id)
+        db.session.add(contact)
+        db.session.commit()  
+
+    @staticmethod
+    def get(owner_id):
+        contacts = Contacts.query.filter_by(owner_id=owner_id)
+        return contacts
+
 
 @app.route('/')
 def index():
@@ -162,6 +175,27 @@ def profile(user_id):
         profile = Profile.get_by_user_id(user.id)
         return render_template('profile_all.html', user=user, profile=profile)
     return render_template('error.html', msg_eror="not id {}".format(user_id))
+
+@app.route('/user/<owner_id>/contact', methods=['GET'])
+def contact(owner_id):
+    add_user_id = request.args.get("user_id")
+    owner_id=int(owner_id)    
+    if add_user_id:
+        add_user_id=int(add_user_id)
+        add = Contacts.query.filter_by(owner_id=owner_id, user_id=add_user_id).all()
+        if not add:
+            Contacts.create(owner_id, add_user_id)
+    contacts = Contacts.get(owner_id=owner_id)
+    users = User.query.all()
+    new_users = []
+    for user in users:
+        if user.id != owner_id:
+            for contact in contacts:
+                if user.id == contact.user_id:
+                    break
+            else:
+                new_users.append(user)
+    return render_template("contact_list.html", contacts=contacts, users=new_users, owner_id=owner_id)
 
 
 
