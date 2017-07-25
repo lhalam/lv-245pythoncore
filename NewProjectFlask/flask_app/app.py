@@ -104,6 +104,31 @@ def user_update(user_id):
         return render_template('user_info.html', user=user, profile=profile, form=form)
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
+@app.route('/user/<user_id>/profile/update', methods=['GET','POST'])
+def profile_update(user_id):
+    user = User.get_by_id(user_id)
+    profile = Profile.get_by_user_id(user_id)
+    if user:
+        if profile:
+            form = ProfileForm(request.form)
+            if request.method == 'GET':
+                form.bday.data = profile.bday
+                form.sex.data = profile.sex
+                form.city.data = profile.city
+                form.zip_code.data = profile.zip_code
+                form.phone.data = profile.phone
+            if request.method == 'POST' and form.validate():
+                profile.bday = form.bday.data
+                profile.sex = form.sex.data
+                profile.city = form.city.data
+                profile.zip_code = form.zip_code.data
+                profile.phone = form.phone.data
+                db.session.add(user)
+                db.session.commit()
+            return render_template('profile_info.html', user=user, profile=profile, form=form)   
+        return render_template('error.html', msg_eror="not profile for update for id {}".format(user_id))    
+    return render_template('error.html', msg_eror="not id {}".format(user_id))
+
 @app.route('/user/<user_id>/delete', methods=['GET'])
 def user_delete(user_id):
     user = User.get_by_id(user_id)
@@ -124,7 +149,7 @@ def profile_post_get(user_id):
                           city = form.city.data,
                           zip_code = form.zip_code.data,
                           phone = form.phone.data)
-        db.session.add(user)
+        db.session.add(profile)
         db.session.commit()
         _url = '/user/' + str(user_id)
         return redirect(_url)    

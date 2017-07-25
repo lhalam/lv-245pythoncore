@@ -16,8 +16,9 @@
     sex: {{ profile.sex }} <br>
     city: {{ profile.city }} <br>
     zip_code: {{ profile.zip_code }} <br>
-    phone: {{ profile.phone }}
+    phone: {{ profile.phone }} <br>
+<a href='http://localhost:5000/user/{{ user.id }} /profile/update'>update profile</a>
 </div>
-{% endif %}
-
+{% else %}
 <a href='http://localhost:5000/user/{{ user.id }}/add/profile'>add profile</a>
+{% endif %}
