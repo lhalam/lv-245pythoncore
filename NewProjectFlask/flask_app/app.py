@@ -104,7 +104,17 @@ def user_update(user_id):
         return render_template('user_info.html', user=user, profile=profile, form=form)
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
-@app.route('/user/<user_id>/profile', methods=['GET','POST'])
+@app.route('/user/<user_id>/delete', methods=['GET'])
+def user_delete(user_id):
+    user = User.get_by_id(user_id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return redirect('/user')
+    return render_template('error.html', msg_eror="not id {}".format(user_id))
+
+
+@app.route('/user/<user_id>/add/profile', methods=['GET','POST'])
 def profile_post_get(user_id):
     form = ProfileForm(request.form)
     if request.method == 'POST' and form.validate():
@@ -120,6 +130,13 @@ def profile_post_get(user_id):
         return redirect(_url)    
     return render_template('profile_add.html', form=form)
 
+@app.route('/user/<user_id>/profile', methods=['GET'])
+def profile(user_id):
+    user = User.get_by_id(user_id)
+    if user:
+        profile = Profile.get_by_user_id(user.id)
+        return render_template('profile_all.html', user=user, profile=profile)
+    return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 
 

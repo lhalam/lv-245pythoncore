@@ -12,6 +12,7 @@
             <td>{{ user.first_name }}</td>
             <td>{{ user.last_name }}</td>            
             <td>{{ user.email }}</td>
+            <td><a href='http://localhost:5000/user/{{ user.id }}/delete'>delete</a></td>
         </tr>
     {% endfor %}
 </table>
