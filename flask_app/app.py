@@ -1,12 +1,12 @@
 import os.path
 
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 
 from form.userForms import UserForm
 from form.profileForm import ProfileForm
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'myApp.sqlite')
@@ -49,6 +49,28 @@ class Profile(db.Model):
             return profile
         except Exception, e:
             return None
+
+class Contact(db.Model):
+    owner_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True)
+    
+    @staticmethod
+    def create(owner_id, user_id):
+        contact = Contact(owner_id = owner_id,
+                          user_id = user_id)
+        db.session.add(contact)
+        db.session.commit()  
+
+    @staticmethod
+    def get(owner_id):
+        contacts = Contact.query.filter_by(owner_id=owner_id)
+        return contacts
+  
+
+
+@app.route('/static/<path:path>')
+def send_js(path):
+    return send_from_directory('static', path)
     
 
 @app.route('/')
@@ -58,10 +80,30 @@ def index():
             <a href='http://localhost:5000/user/add'>add user</a><br>
             """
 
-@app.route('/test')
-def hello_world_test():
-    return 'test Hello, World!'
+# http://localhost:5000/user/2/contact?user_id=3
+@app.route('/user/<owner_id>/contact', methods=['GET'])
+def contact(owner_id):
+    add_user_id = request.args.get("user_id")
+    print "add_user_id", add_user_id
+    if add_user_id:
+        add = Contact.query.filter_by(owner_id=owner_id, user_id=add_user_id).all()
+        print "add:", add
+        if not add:
+            Contact.create(owner_id, add_user_id)
 
+    contacts = Contact.get(owner_id=owner_id)
+    users = User.query.all()
+
+    new_users = []
+    for user in users:
+        for contact in contacts:
+            if user.id == contact.user_id:
+                break
+        else:
+            new_users.append(user)
+
+
+    return render_template("contact_list.html", contacts=contacts, users=new_users, owner_id=owner_id)
 
 @app.route('/user', methods=['GET'])
 def user_get():
@@ -114,9 +156,9 @@ def user_update(user_id):
 def profile_post_get(user_id):
     form = ProfileForm(request.form)
     if request.method == 'POST' and form.validate():
-        profile = Profile(user_id = user_id,
-                          city = form.city.data,
-                          zip_code = form.zip_code.data)
+        profile = Profile(user_id=user_id,
+                          city=form.city.data,
+                          zip_code=form.zip_code.data)
         db.session.add(profile)
         db.session.commit()
         _url = '/user/' + str(user_id)
@@ -124,8 +166,15 @@ def profile_post_get(user_id):
     # print form.errors
     return render_template('profile_add.html', form=form)
 
+@app.route('/user/<user_id>/info', methods=['GET'])
+def users_info_one(user_id):
+    u = User.query.all()
+    p = Profile.get_by_user_id(user_id)
+
+    return render_template('users_info_one.html',users=u, profile=p)
+
+
 
 if __name__ == "__main__":
     db.create_all()
     app.run()
-
