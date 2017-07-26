@@ -1,0 +1,42 @@
+<a href='http://localhost:5000/user'>User list</a><br>
+{% from "_formhelpers.html" import render_field %}
+<div>{{ msg }}</div>
+<form method=post>
+  <dl>
+    {{ render_field(form.first_name) }}
+    {{ render_field(form.last_name) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.email) }}
+  </dl>
+  </dl>
+  <p><input type=submit value=Update>
+</form>
+{% if profile %}
+<div>
+    <table border>
+        <tr>
+            <td>Birthday</td>
+            <td>{{ profile.bday }}</td>
+        </tr>
+        <tr>
+            <td>Sex</td>
+            <td>{{ profile.sex }}</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>{{ profile.city }}</td>
+        </tr>
+        <tr>
+            <td>Zip_code</td>
+            <td>{{ profile.zip_code }}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{ profile.phone }}</td>
+        </tr>
+    </table>    
+<a href='http://localhost:5000/user/{{ user.id }}/profile/update'>Update profile</a>
+</div>
+{% else %}
+<a href='http://localhost:5000/user/{{ user.id }}/add/profile'>Add profile</a>
+{% endif %}

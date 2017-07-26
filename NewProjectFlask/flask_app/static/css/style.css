@@ -1,0 +1,40 @@
+body {
+    background-color: aliceblue;
+}
+
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+
+.menu{
+    margin: 10 auto;
+    width: 20%;
+    padding: 10;
+    background-color: moccasin;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold
+}
+
+.add_user{
+    margin: 10px;
+    width: 20%;
+    padding: 10px;
+    background-color: moccasin;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold
+}
+
+.users{
+    border: solid;
+    border-color: deepskyblue;
+    font-size: 1.1em;
+}
+
+td {
+    border: solid;
+
+}
