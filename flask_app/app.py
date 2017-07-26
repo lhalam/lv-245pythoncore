@@ -31,9 +31,6 @@ def hello_world():
             """
 
 
-@app.route('/test')
-def hello_world_test():
-    return 'test Hello, World!'
 
 
 @app.route('/user', methods=['GET'])
