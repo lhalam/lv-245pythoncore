@@ -14,9 +14,7 @@
                         <th>{{ user.id }}</th>
                         <th>{{ user.first_name }}</th>
                         <th>{{ user.last_name }}</th>
-                        <th>{{ user.age }}</th>
                         <th><a href='http://localhost:5000/user/{{ user.id }}/info'>info</a></th>
-                         <th><a href='http://localhost:5000/user/{{ user.id }}'>edit</a></th>
                         <th><a href='http://localhost:5000/user/{{ user.id }}/delete'>delete</a></th>
                     </tr>
                 {% endfor %}

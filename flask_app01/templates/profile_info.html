@@ -1,7 +1,10 @@
-<body bgcolor="#c0c0c0" background="https://wallpaperscraft.ru/image/ruchka_tetrad_kletochka_formuly_uchba_80658_1366x768.jpg"
-bgproperties="fixed">
-</body>
+<a href='http://localhost:5000/user'>User list</a><br>
 {% from "_formhelpers.html" import render_field %}
+<div>
+    bday: {{ user.first_name }} <br>
+    sex: {{ user.last_name }} <br>
+    city: {{ user.email }} <br>
+</div>
 <form method=post>
   <dl>
     {{ render_field(form.bday) }}

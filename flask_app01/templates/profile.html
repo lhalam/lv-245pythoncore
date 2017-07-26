@@ -1,0 +1,19 @@
+<body bgcolor="#c0c0c0" background="https://wallpaperscraft.ru/image/ruchka_tetrad_kletochka_formuly_uchba_80658_1366x768.jpg"
+bgproperties="fixed">
+</body>
+<a href='http://localhost:5000/user'>User list</a><br>
+<div>
+    User name: {{ user.username }} <br>
+    First name: {{ user.first_name }} <br>
+    Last name: {{ user.last_name }} <br>
+    email: {{ user.email }} <br>
+</div>
+{% if profile %}
+<div>
+    bday: {{ profile.bday }} <br>
+    sex: {{ profile.sex }} <br>
+    city: {{ profile.city }} <br>
+    zip_code: {{ profile.zip_code }} <br>
+    phone: {{ profile.phone }}
+</div>
+{% endif %}

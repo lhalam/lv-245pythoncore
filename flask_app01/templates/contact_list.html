@@ -1,4 +1,7 @@
-<a href='http://localhost:5000/user/'>users</a><br>
+<body bgcolor="#c0c0c0" background="https://wallpaperscraft.ru/image/ruchka_tetrad_kletochka_formuly_uchba_80658_1366x768.jpg"
+bgproperties="fixed">
+</body>
+<a href='http://localhost:5000/user'>users</a><br>
 <table border>
     <tr>
         <th>owner_id</th>
@@ -9,6 +12,7 @@
             <tr>
                 <th>{{ contact.owner_id }}</th>
                 <th>{{ contact.user_id }}</th>
+                <th><a href='http://localhost:5000/user/{{ contact.user_id }}/profile'>Profile</a></th>
             </tr>
         {% endfor %}
     {% endif %}
@@ -16,7 +20,7 @@
 {% if users%}
     {% for user in users %}
         {{ user.id }}
-        <a href='http://localhost:5000/user/{{ owner_id }}/contact?user_id={{user.id}}'>add</a>
+        <a href='http://localhost:5000/user/{{ owner_id }}/contact?user_id={{ user.id }}'>add</a>
         <br>
     {% endfor %}
 {% endif %}
