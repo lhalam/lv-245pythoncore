@@ -197,6 +197,18 @@ def contact(owner_id):
                 new_users.append(user)
     return render_template("contact_list.html", contacts=contacts, users=new_users, owner_id=owner_id)
 
+@app.route('/user/<owner_id>/delete/contact', methods=['GET'])
+def contact_delete(owner_id):
+    user_id = request.args.get("user_id")
+    owner_id=int(owner_id)  
+    if user_id:
+        user_id=int(user_id)
+        del_contact = Contacts.query.filter_by(owner_id=owner_id, user_id=user_id).first()
+        db.session.delete(del_contact)
+        db.session.commit()
+        _url = '/user/' + str(owner_id)+ '/contact'
+        return redirect(_url)
+    return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 
 
