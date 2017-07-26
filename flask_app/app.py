@@ -170,13 +170,16 @@ def profile_del(profile_id):
 def contact(owner_id):
     users = User.query.all()
     users = [user for user in users if not user.id == int(owner_id)]
-    return render_template('contact_list.html', users=users)
+    return render_template('contact_list.html', users=users, owner_id=owner_id)
 
 
 
-@app.route('/user/<user_id>/contact/add', methods=['GET'])
-def add_contact(user_id):
-    return user_id
+@app.route('/user/<user_id>/contact/add/<id>', methods=['GET'])
+def add_contact(user_id, id):
+    contact = Contact(owner_id = user_id, user_id = id)
+    db.session.add(contact)
+    db.session.commit()
+    return redirect('/user/{}/contact'.format(user_id))
 
 
 
