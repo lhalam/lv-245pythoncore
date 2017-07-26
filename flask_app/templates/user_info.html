@@ -10,13 +10,14 @@
   <p><input type=submit value=Update>
 </form>
 {% if profile %}
-<div>
-    birthday: {{ profile.birthday }} <br>
-    sex: {{ profile.sex }}<br>
-    city: {{ profile.city }} <br>
-    zip_code: {{ profile.zip_code }} <br>
-    phone: {{ profile.phone }}
-</div>
+    <div>
+        birthday: {{ profile.birthday }} <br>
+        sex: {{ profile.sex }}<br>
+        city: {{ profile.city }} <br>
+        zip_code: {{ profile.zip_code }} <br>
+        phone: {{ profile.phone }}
+    </div>
+    <a href='http://localhost:5000/user/{{ user_id }}/profile'>edit profile</a>
+{% else %}
+    <a href='http://localhost:5000/user/{{ user_id }}/profile'>add profile</a>
 {% endif %}
-
-<a href='http://localhost:5000/user/{{ user.id }}/profile'>add profile</a>

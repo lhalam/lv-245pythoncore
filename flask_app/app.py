@@ -89,8 +89,8 @@ def index():
 # http://localhost:5000/user/2/contact?user_id=3
 @app.route('/user/<owner_id>/contact', methods=['GET'])
 def contact(owner_id):
-    add_user_id = request.args.get("user_id")
-    print "add_user_id", add_user_id
+    add_user_id = request.args.get('user_id')
+    #print "add_user_id", add_user_id#
     if add_user_id:
         add = Contact.query.filter_by(owner_id=owner_id, user_id=add_user_id).all()
         print "add:", add
@@ -160,26 +160,56 @@ def user_update(user_id):
             user.password = form.password.data
             db.session.add(user)
             db.session.commit()
-        return render_template('user_info.html', user=user, profile=profile, form=form)
+        return render_template('user_info.html', user_id=user.id, profile=profile, form=form)
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 
 @app.route('/user/<user_id>/profile', methods=['GET', 'POST'])
 def profile_post_get(user_id):
-    form = ProfileForm(request.form)
-    if request.method == 'POST' and form.validate():
-        profile = Profile(user_id=user_id,
-                          birthday=form.birthday.data,
-                          sex=form.sex.data,
-                          city=form.city.data,
-                          zip_code=form.zip_code.data,
-                          phone = form.phone.data,)
-        db.session.add(profile)
-        db.session.commit()
-        _url = '/user/' + str(user_id)
-        return redirect(_url)
-    # print form.errors
-    return render_template('profile_add.html', form=form)
+    user = User.get_by_id(user_id)
+    if user:
+        form = ProfileForm(request.form)
+        profile = Profile.get_by_user_id(user.id)
+
+        if profile:
+            if request.method == 'GET':
+                form.birthday.data = profile.birthday
+                form.sex.data = profile.sex
+                form.city.data = profile.city
+                form.zip_code.data = profile.zip_code
+                form.phone.data = profile.phone
+                return render_template('profile_add.html', form=form)
+            if request.method == 'POST':
+                if form.validate():
+                    profile.birthday = form.birthday.data
+                    profile.sex = form.sex.data
+                    profile.city = form.city.data
+                    profile.zip_code = form.zip_code.data
+                    profile.phone = form.phone.data
+                    db.session.add(profile)
+                    db.session.commit()
+                    return redirect('/user/{}'.format(user_id))
+                # return render_template('profile_add.html', form=form)
+
+        else:
+            if request.method == 'GET':
+                return render_template('profile_add.html', form=form)
+
+            if request.method == 'POST' and form.validate():
+                profile = Profile(user_id=user.id,
+                                  birthday=form.birthday.data,
+                                  sex=form.sex.data,
+                                  city=form.city.data,
+                                  zip_code=form.zip_code.data,
+                                  phone=form.phone.data)
+                db.session.add(profile)
+                db.session.commit()
+                _url = '/user/' + str(user_id)
+                return redirect(_url)
+        # print form.errors
+        return render_template('profile_add.html', form=form)
+    else:
+        return render_template('error.html', msg_eror="not id {}".format(user_id))
 
 
 @app.route('/user/<user_id>/info', methods=['GET'])
