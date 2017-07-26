@@ -1,0 +1,15 @@
+<a href='http://localhost:5000/user'>User list</a><br>
+<div>
+    First name: {{ user.first_name }} <br>
+    Last name: {{ user.last_name }} <br>
+    email: {{ user.email }} <br>
+</div>
+{% if profile %}
+<div>
+    bday: {{ profile.bday }} <br>
+    sex: {{ profile.sex }} <br>
+    city: {{ profile.city }} <br>
+    zip_code: {{ profile.zip_code }} <br>
+    phone: {{ profile.phone }}
+</div>
+{% endif %}

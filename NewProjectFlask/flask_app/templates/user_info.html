@@ -12,13 +12,30 @@
 </form>
 {% if profile %}
 <div>
-    bday: {{ profile.bday }} <br>
-    sex: {{ profile.sex }} <br>
-    city: {{ profile.city }} <br>
-    zip_code: {{ profile.zip_code }} <br>
-    phone: {{ profile.phone }} <br>
-<a href='http://localhost:5000/user/{{ user.id }}/profile/update'>update profile</a>
+    <table border>
+        <tr>
+            <td>Birthday</td>
+            <td>{{ profile.bday }}</td>
+        </tr>
+        <tr>
+            <td>Sex</td>
+            <td>{{ profile.sex }}</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>{{ profile.city }}</td>
+        </tr>
+        <tr>
+            <td>Zip_code</td>
+            <td>{{ profile.zip_code }}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{ profile.phone }}</td>
+        </tr>
+    </table>    
+<a href='http://localhost:5000/user/{{ user.id }}/profile/update'>Update profile</a>
 </div>
 {% else %}
-<a href='http://localhost:5000/user/{{ user.id }}/add/profile'>add profile</a>
+<a href='http://localhost:5000/user/{{ user.id }}/add/profile'>Add profile</a>
 {% endif %}

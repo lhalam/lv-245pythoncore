@@ -74,17 +74,13 @@ class Contacts(db.Model):
 @app.route('/')
 def index():
     return """
-            <a href='http://localhost:5000/user'>Users list</a><br>
-            <a href='http://localhost:5000/user/add'>Add user</a><br>
+            <a href='http://localhost:5000/user'>user</a><br>
+            <a href='http://localhost:5000/user/add'>add user</a><br>
             """
 
 @app.route('/user', methods=['GET'])
 def user_get():
     users = User.query.all()
-    for user in users:
-        profile = Profile.get_by_user_id(user.id)
-        if profile:
-            user.fl = True
     return render_template('users.html', users=users)
 
 @app.route('/user/add', methods=['GET','POST'])
@@ -191,12 +187,7 @@ def contact(owner_id):
             Contacts.create(owner_id, add_user_id)
     contacts = Contacts.get(owner_id=owner_id)
     users = User.query.all()
-    owner = User.get_by_id(owner_id)
     new_users = []
-    contact_user = []
-    for contact in contacts:
-        user_c = User.get_by_id(contact.user_id)
-        contact_user.append(user_c)
     for user in users:
         if user.id != owner_id:
             for contact in contacts:
@@ -204,7 +195,7 @@ def contact(owner_id):
                     break
             else:
                 new_users.append(user)
-    return render_template("contact_list.html", contacts=contact_user, users=new_users, owner=owner)
+    return render_template("contact_list.html", contacts=contacts, users=new_users, owner_id=owner_id)
 
 @app.route('/user/<owner_id>/delete/contact', methods=['GET'])
 def contact_delete(owner_id):

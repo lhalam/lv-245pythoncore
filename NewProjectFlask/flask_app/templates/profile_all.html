@@ -1,15 +1,45 @@
 <a href='http://localhost:5000/user'>User list</a><br>
 <div>
-    First name: {{ user.first_name }} <br>
-    Last name: {{ user.last_name }} <br>
-    email: {{ user.email }} <br>
+    User:
+    <table border>
+        <tr>
+            <td>First name</td>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <td>Last name</td>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ user.email }}</td>
+        </tr>
+    </table>
 </div>
 {% if profile %}
 <div>
-    bday: {{ profile.bday }} <br>
-    sex: {{ profile.sex }} <br>
-    city: {{ profile.city }} <br>
-    zip_code: {{ profile.zip_code }} <br>
-    phone: {{ profile.phone }}
+    Profile:
+    <table border>
+        <tr>
+            <td>Birthday</td>
+            <td>{{ profile.bday }}</td>
+        </tr>
+        <tr>
+            <td>Sex</td>
+            <td>{{ profile.sex }}</td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>{{ profile.city }}</td>
+        </tr>
+        <tr>
+            <td>Zip_code</td>
+            <td>{{ profile.zip_code }}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{ profile.phone }}</td>
+        </tr>
+    </table>
 </div>
 {% endif %}

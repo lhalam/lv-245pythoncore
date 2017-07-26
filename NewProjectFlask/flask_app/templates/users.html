@@ -1,20 +1,24 @@
-<a href='http://localhost:5000/user/add'>add user</a><br>
+<a href='http://localhost:5000/user/add'>Add user</a><br>
 <table border>
-  <tr>
-    <th>id</th>
+  <tr>    
     <th>first_name</th>
     <th>last_name</th>
     <th>email</th>    
   </tr>
     {% for user in users %}
         <tr>
-            <td>{{ user.id }}</td>
             <td>{{ user.first_name }}</td>
             <td>{{ user.last_name }}</td>            
-            <td>{{ user.email }}</td>
-            <td><a href='http://localhost:5000/user/{{ user.id }}/delete'>delete</a></td>
-            <td><a href='http://localhost:5000/user/{{ user.id }}'>update</a></td>
-            <td><a href='http://localhost:5000/user/{{ user.id }}/contact'>contacts</a></td>
+            <td>{{ user.email }}</td>            
+            <td><a href='http://localhost:5000/user/{{ user.id }}'>Update user</a></td>
+            <td>{% if user.fl %}
+                    <a href='http://localhost:5000/user/{{ user.id }}/profile/update'>Update profile</a>
+                {% else %}
+                    <a href='http://localhost:5000/user/{{ user.id }}/add/profile'>Add profile</a>
+                {% endif %}
+            </td>             
+            <td><a href='http://localhost:5000/user/{{ user.id }}/contact'>See contacts</a></td>
+            <td><a href='http://localhost:5000/user/{{ user.id }}/delete'>Delete user</a></td>
         </tr>
     {% endfor %}
 </table>

@@ -1,4 +1,5 @@
 <a href='http://localhost:5000/user'>users</a><br>
+Contacts for {{ owner.first_name }}   {{ owner.last_name }}
 <table border>
     <tr>
         <th>owner_id</th>
@@ -7,18 +8,23 @@
     {% if contacts%}
         {% for contact in contacts %}
             <tr>
-                <th>{{ contact.owner_id }}</th>
-                <th>{{ contact.user_id }}</th>
-                <th><a href='http://localhost:5000/user/{{ contact.user_id }}/profile'>Profile</a></th>
-                <th><a href='http://localhost:5000/user/{{ contact.owner_id }}/delete/contact?user_id={{ contact.user_id }}'>Delete</a></th>
+                <th>{{ contact.first_name }}</th>
+                <th>{{ contact.last_name }}</th>
+                <th><a href='http://localhost:5000/user/{{ contact.id }}/profile'>Profile</a></th>
+                <th><a href='http://localhost:5000/user/{{ owner.id }}/delete/contact?user_id={{ contact.id }}'>Delete</a></th>
             </tr>
         {% endfor %}
     {% endif %}
 </table>
 {% if users%}
-    {% for user in users %}
-        {{ user.id }} 
-        <a href='http://localhost:5000/user/{{ owner_id }}/contact?user_id={{ user.id }}'>add</a>
-        <br>
-    {% endfor %}
+    Add new contact
+    <table border>
+        {% for user in users %}
+            <tr>
+                <th>{{ user.first_name }}</th>
+                <th>{{ user.last_name }}</th>
+                <th><a href='http://localhost:5000/user/{{ owner.id }}/contact?user_id={{ user.id }}'>Add</a></th>                
+            <tr>
+        {% endfor %}
+     </table>
 {% endif %} 
