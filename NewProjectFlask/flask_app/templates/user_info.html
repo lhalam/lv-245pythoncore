@@ -1,5 +1,6 @@
 <a href='http://localhost:5000/user'>User list</a><br>
 {% from "_formhelpers.html" import render_field %}
+<div>{{ msg }}</div>
 <form method=post>
   <dl>
     {{ render_field(form.first_name) }}

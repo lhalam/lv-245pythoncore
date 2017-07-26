@@ -1,12 +1,12 @@
 import os.path
 
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 
 from form.userForms import UserForm
 from form.profileForms import ProfileForm
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'myApp.sqlite')
@@ -71,12 +71,23 @@ class Contacts(db.Model):
         return contacts
 
 
+@app.route('/static/<path:path>')
+def send_js(path):
+    return send_from_directory('static', path)
+
+
+# @app.route('/')
+# def index():
+#     return """
+#             <a href='http://localhost:5000/user'>Users list</a><br>
+#             <a href='http://localhost:5000/user/add'>Add user</a><br>
+#             """
+
+
 @app.route('/')
 def index():
-    return """
-            <a href='http://localhost:5000/user'>Users list</a><br>
-            <a href='http://localhost:5000/user/add'>Add user</a><br>
-            """
+    return render_template('base.html')    
+
 
 @app.route('/user', methods=['GET'])
 def user_get():
@@ -86,6 +97,7 @@ def user_get():
         if profile:
             user.fl = True
     return render_template('users.html', users=users)
+
 
 @app.route('/user/add', methods=['GET','POST'])
 def user_add():
@@ -100,9 +112,11 @@ def user_add():
         return redirect('/user')
     return render_template('user_add.html', form=form)
 
+
 @app.route('/user/<user_id>', methods=['GET','POST'])
 def user_update(user_id):
     user = User.get_by_id(user_id)
+    msg=''
     if user:
         profile = Profile.get_by_user_id(user.id)
         form = UserForm(request.form)
@@ -118,13 +132,16 @@ def user_update(user_id):
             user.email = form.email.data
             db.session.add(user)
             db.session.commit()
-        return render_template('user_info.html', user=user, profile=profile, form=form)
+            msg='successful update'
+        return render_template('user_info.html', user=user, profile=profile, form=form, msg=msg)
     return render_template('error.html', msg_eror="not id {}".format(user_id))
+
 
 @app.route('/user/<user_id>/profile/update', methods=['GET','POST'])
 def profile_update(user_id):
     user = User.get_by_id(user_id)
     profile = Profile.get_by_user_id(user_id)
+    msg=''
     if user:
         if profile:
             form = ProfileForm(request.form)
@@ -142,9 +159,11 @@ def profile_update(user_id):
                 profile.phone = form.phone.data
                 db.session.add(user)
                 db.session.commit()
-            return render_template('profile_info.html', user=user, profile=profile, form=form)   
+                msg='successful update'
+            return render_template('profile_info.html', user=user, profile=profile, form=form, msg=msg)   
         return render_template('error.html', msg_eror="not profile for update for id {}".format(user_id))    
     return render_template('error.html', msg_eror="not id {}".format(user_id))
+
 
 @app.route('/user/<user_id>/delete', methods=['GET'])
 def user_delete(user_id):
@@ -152,6 +171,15 @@ def user_delete(user_id):
     if user:
         db.session.delete(user)
         db.session.commit()
+        profile = Profile.get_by_user_id(user_id)
+        if profile:
+            db.session.delete(profile)
+            db.session.commit()
+        contacts = Contacts.query.filter_by(owner_id=user_id).all()
+        if contacts:
+            for contact in contacts:
+                db.session.delete(contact)
+                db.session.commit()
         return redirect('/user')
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
@@ -172,6 +200,7 @@ def profile_post_get(user_id):
         return redirect(_url)    
     return render_template('profile_add.html', form=form)
 
+
 @app.route('/user/<user_id>/profile', methods=['GET'])
 def profile(user_id):
     user = User.get_by_id(user_id)
@@ -179,6 +208,7 @@ def profile(user_id):
         profile = Profile.get_by_user_id(user.id)
         return render_template('profile_all.html', user=user, profile=profile)
     return render_template('error.html', msg_eror="not id {}".format(user_id))
+
 
 @app.route('/user/<owner_id>/contact', methods=['GET'])
 def contact(owner_id):
@@ -205,6 +235,7 @@ def contact(owner_id):
             else:
                 new_users.append(user)
     return render_template("contact_list.html", contacts=contact_user, users=new_users, owner=owner)
+
 
 @app.route('/user/<owner_id>/delete/contact', methods=['GET'])
 def contact_delete(owner_id):

@@ -1,24 +1,27 @@
-<a href='http://localhost:5000/user/add'>Add user</a><br>
-<table border>
-  <tr>    
-    <th>first_name</th>
-    <th>last_name</th>
-    <th>email</th>    
-  </tr>
-    {% for user in users %}
-        <tr>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>            
-            <td>{{ user.email }}</td>            
-            <td><a href='http://localhost:5000/user/{{ user.id }}'>Update user</a></td>
-            <td>{% if user.fl %}
-                    <a href='http://localhost:5000/user/{{ user.id }}/profile/update'>Update profile</a>
-                {% else %}
-                    <a href='http://localhost:5000/user/{{ user.id }}/add/profile'>Add profile</a>
-                {% endif %}
-            </td>             
-            <td><a href='http://localhost:5000/user/{{ user.id }}/contact'>See contacts</a></td>
-            <td><a href='http://localhost:5000/user/{{ user.id }}/delete'>Delete user</a></td>
-        </tr>
-    {% endfor %}
-</table>
+{% extends "base.html" %}
+{% block body %}
+    <div class="add_user"><a href='http://localhost:5000/user/add'>Add user</a></div>
+    <table class="users">
+      <tr>    
+        <th>first_name</th>
+        <th>last_name</th>
+        <th>email</th>    
+      </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>            
+                <td>{{ user.email }}</td>            
+                <td><a href='http://localhost:5000/user/{{ user.id }}'>Update user</a></td>
+                <td>{% if user.fl %}
+                        <a href='http://localhost:5000/user/{{ user.id }}/profile/update'>Update profile</a>
+                    {% else %}
+                        <a href='http://localhost:5000/user/{{ user.id }}/add/profile'>Add profile</a>
+                    {% endif %}
+                </td>             
+                <td><a href='http://localhost:5000/user/{{ user.id }}/contact'>See contacts</a></td>
+                <td><a href='http://localhost:5000/user/{{ user.id }}/delete'>Delete user</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
