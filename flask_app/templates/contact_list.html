@@ -1,26 +1,36 @@
 <link rel="stylesheet" href="/static/css/style.css">
 <div id="main">
     <div id="menu">
-<a href='http://localhost:5000/'>main page</a><br>
+<a href='http://localhost:5000/user'>user list</a>
     </div>
 <div id="content">
 <table border>
   <tr>
     <th>id</th>
+	<th>username</th>
     <th>firstname</th>
     <th>lastname</th>
+	<th>email</th>
+	<th>password</th>
     <th>age</th>
   </tr>
+  <form method=post>
     {% for user in users %}	    
         <tr>
             <th>{{ user.id }}</th>
+			<th>{{ user.username }}</th>
             <th>{{ user.firstname }}</th>
             <th>{{ user.lastname }}</th>
+			<th>{{ user.email }}</th>
+			<th>{{ user.password }}</th>
             <th>{{ user.age }}</th>
-			<th><a href='http://localhost:5000/contact/{{ user.id }}/add'>add</a></th>
-          
+			<th><a href='http://localhost:5000/user/{{ user.id }}/contact/add'>add</a></th>          
         </tr>
     {% endfor %}
+   </form>
 </table>
+<form method=post>
+    <p><input type=submit value=Update>
+</form>
 </div>
 </div>

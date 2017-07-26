@@ -10,14 +10,20 @@
             <table border>
               <tr>
                 <th>id</th>
+				<th>username</th>
                 <th>firstname</th>
                 <th>lastname</th>
+				<th>email</th>
+				<th>password</th>
                 <th>age</th>
               </tr>                
                     <tr>
                         <th>{{ user.id }}</th>
+						<th>{{ user.username }}</th>
                         <th>{{ user.firstname }}</th>
                         <th>{{ user.lastname }}</th>
+						<th>{{ user.email }}</th>
+						<th>{{ user.password }}</th>
                         <th>{{ user.age }}</th>
                        </tr>
                    	
@@ -27,12 +33,43 @@
         <td>
             {% if profile %}
             <div>
+			    bday: {{ profile.bday }} <br>
+				sex: {{ profile.sex }} <br>
                 city: {{ profile.city }} <br>
-                zip_code: {{ profile.zip_code }}
+                zip_code: {{ profile.zip_code }} <br>
+				phone: {{ profile.phone }} 
             </div>
             {% endif %}
-        </td>
-    </tr>
+        </td>	
+        <td>
+		    <strong>Your contact list</strong>
+		    <table border>
+              <tr>
+                <th>id</th>
+				<th>username</th>
+                <th>firstname</th>
+                <th>lastname</th>
+				<th>email</th>
+				<th>password</th>
+                <th>age</th>
+              </tr> 
+                    {% if contact %}			  
+                    <tr>
+                        <th>{{ contact.id }}</th>
+						<th>{{ contact.username }}</th>
+                        <th>{{ contact.firstname }}</th>
+                        <th>{{ contact.lastname }}</th>
+						<th>{{ contact.email }}</th>
+						<th>{{ contact.password }}</th>
+                        <th>{{ contact.age }}</th>
+						<th><a style='color:red'>delete</a></th>
+                       </tr>
+                   	{% endif %}
+            </table>
+		</td>
+	</tr>
 </table>
+
+ 
 </dir>
 </div>

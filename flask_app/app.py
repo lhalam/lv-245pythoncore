@@ -7,7 +7,7 @@ from form.userForms import UserForm
 from form.profileForm import ProfileForm
 
 
-app = Flask(__name__)#app = Flask(__name__, static_url_path='')<--------------------------------------------------------------------------------------
+app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'myApp.sqlite')
@@ -16,8 +16,11 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(20), nullable=False)
-    lastname = db.Column(db.String(20), nullable=False)
+    username = db.Column(db.String(50), nullable=False)
+    firstname = db.Column(db.String(30), nullable=False)
+    lastname = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
     age = db.Column(db.Integer, nullable=True)
 
     @staticmethod
@@ -28,14 +31,15 @@ class User(db.Model):
         except Exception:
             return None
 
-    def __repr__(self):
-        return "{} {}".format(self.id, self.firstname)
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, nullable=False)
-    city = db.Column(db.String(20), nullable=True)
+    bday = db.Column(db.Integer, nullable=True)
+    sex = db.Column(db.String(20), nullable=False)
+    city = db.Column(db.String(20), nullable=False)
     zip_code = db.Column(db.Integer, nullable=True)
+    phone = db.Column(db.Integer, nullable=True)
 
     @staticmethod
     def get_by_id(user_id):
@@ -53,10 +57,10 @@ class Profile(db.Model):
         except Exception:
             return None
 
-
-class Contact(db.Model):
-    owner_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, primary_key=True)
+class Contact(db.Model):#<-----------------------------------------------------------------------------------
+    id = db.Column(db.Integer, primary_key=True)
+    owner_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
 
     @staticmethod
     def create(owner_id, user_id):
@@ -85,8 +89,11 @@ def user_get():
 def user_add():
     form = UserForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(firstname=form.firstname.data,
+        user = User(username=form.username.data,
+                    firstname=form.firstname.data,
                     lastname=form.lastname.data,
+                    email=form.email.data,
+                    password=form.password.data,
                     age=form.age.data)
         db.session.add(user)
         db.session.commit()
@@ -115,12 +122,18 @@ def user_update(user_id):
         profile = Profile.get_by_user_id(user.id)
         form = UserForm(request.form)
         if request.method == 'GET':
+            form.username.data = user.username
             form.firstname.data = user.firstname
             form.lastname.data = user.lastname
+            form.email.data = user.email
+            form.password.data = user.password
             form.age.data = user.age
         if request.method == 'POST' and form.validate():
+            user.username=form.username.data
             user.firstname = form.firstname.data
             user.lastname = form.lastname.data
+            user.email = form.email.data
+            user.password = form.password.data
             user.age = form.age.data
             db.session.add(user)
             db.session.commit()
@@ -132,13 +145,15 @@ def profile_post_get(user_id):
     form = ProfileForm(request.form)
     if request.method == 'POST' and form.validate():
         profile = Profile(user_id=user_id,
+                          bday=form.bday.data,
+                          sex=form.sex.data,
                           city=form.city.data,
-                          zip_code=form.zip_code.data)
+                          zip_code=form.zip_code.data,
+                          phone=form.phone.data)
         db.session.add(profile)
         db.session.commit()
         _url = '/user/' + str(user_id)
         return redirect(_url)
-    # print form.errors
     return render_template('profile_add.html', form=form)
 
 @app.route('/profile/<profile_id>/delete', methods=['GET'])
@@ -148,17 +163,24 @@ def profile_del(profile_id):
     if profile:
         db.session.delete(profile)
         db.session.commit()
-        return redirect('/user/{}'.format(user_id))#<----------------------------------------------------------------------------------
+        return redirect('/user/{}'.format(user_id))
     return render_template('error.html', msg_eror="not id {}".format(user_id))
 
-@app.route('/user/<user_id>/contact', methods=['GET'])
-def contact(user_id):
+@app.route('/user/<owner_id>/contact', methods=['GET'])
+def contact(owner_id):
     users = User.query.all()
-    users = [user for user in users if not user.id == int(user_id)]
-        
+    users = [user for user in users if not user.id == int(owner_id)]
+    return render_template('contact_list.html', users=users)
 
-    if request.method == "GET":
-        return render_template('contact_list.html', users=users)
+
+
+@app.route('/user/<user_id>/contact/add', methods=['GET'])
+def add_contact(user_id):
+    return user_id
+
+
+
+
 
 
 if __name__ == "__main__":
