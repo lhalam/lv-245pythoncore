@@ -1,0 +1,26 @@
+<a href='http://localhost:5000/user/add'>add user</a><br>
+<img src="img/images.png" alt="Smiley face" width="42" height="42">
+<table border>
+  <tr>
+    <th>id</th>
+    <th>username</th>
+    <th>firstname</th>
+    <th>lastname</th>
+    <th>email</th>
+    <th>age</th>
+  </tr>
+    {% for user in users %}
+        <tr>
+            <th>{{ user.id }}</th>
+            <th>{{ user.username }}</th>
+            <th>{{ user.firstname }}</th>
+            <th>{{ user.lastname }}</th>
+            <th>{{ user.email }}</th>
+            <th>{{ user.age }}</th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}/contact'>contacts</a></th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}/info'>info</a></th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}'>edit</a></th>
+            <th><a href='http://localhost:5000/user/{{ user.id }}/delete'>delete</a></th>
+        </tr>
+    {% endfor %}
+</table>
